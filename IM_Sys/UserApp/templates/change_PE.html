@@ -1,0 +1,121 @@
+{% extends "user_base.html" %}
+{% block title %}
+体检信息修改
+{% endblock %}
+
+{% block subtitle %}
+体检信息修改
+{% endblock %}
+
+
+{% block main %}体检信息修改{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">体检信息修改</h5>
+
+    <!-- Default Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+      <li class="nav-item " role="presentation">
+        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="true">体检信息</button>
+      </li>
+
+    </ul>
+
+    <!-- 个人基本信息 -->
+    <div class="tab-content pt-2" id="myTabContent" >
+      
+
+      <!-- 体检 -->
+      <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" action="{% url 'UserApp:personal_add'%}" >
+          {% csrf_token %}
+          <div class="col-md-12">
+            <label for="user_name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="user_name" name="user_name"  value="{{p.user_name}}" disabled>
+          </div>
+          <input type="hidden" name="id" value="{{p.PEid}}">
+          
+
+          
+
+          <div class="col-md-12">
+            <label for="inputState" class="form-label">性别</label>
+            <select id="user_sex" class="form-select" name="user_sex"  value="{{p.user_sex}}" disabled>
+              {% if p.user_sex  == '男' %}
+              <option selected>男</option>
+              <option>女</option>
+              {% else %}
+              <option >男</option>
+              <option selected>女</option>
+              {% endif %}
+            </select>
+          </div>
+          <input type="hidden" name="type" value="PE">
+
+          <div class="col-md-12">
+            <label for="hospital" class="form-label">检查医院</label>
+            <input type="text" class="form-control" id="hospital" name="hospital"  value="{{p.hospital}}">
+          </div>
+
+          <div class="col-md-12">
+            <label for="items" class="form-label">检查项目</label>
+            <input type="text" class="form-control" id="items" name="items"  value="{{p.items}}">
+          </div>
+
+
+          <div class="col-md-12">
+            <label for="blood_sugar" class="form-label">血糖</label>
+            <input type="text" class="form-control" id="blood_sugar" name="blood_sugar"  value="{{p.blood_sugar}}" placeholder="空腹:3.9-6.1mmol/L(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="total_cholesterol" class="form-label">总胆固醇</label>
+            <input type="text" class="form-control" id="total_cholesterol"  value="{{p.total_cholesterol}}" name="total_cholesterol" placeholder="2.8-5.17mmol/L(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="triglyceride" class="form-label">甘油三酯</label>
+            <!-- <input type="text"  id="modelCode" class="typeahead form-control" data-provide="typeahead"> -->
+            <input type="text" class="form-control" id="triglyceride"  value="{{p.triglyceride}}" name="triglyceride" placeholder="0.56-1.7mmol/L(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="minimum" class="form-label">低压</label>
+            <input type="text" class="form-control" id="minimum"  value="{{p.minimum}}" name="minimum" placeholder="60-89mmHg(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="maximum" class="form-label">高压</label>
+            <input type="text" class="form-control" id="maximum"  value="{{p.maximum}}" name="maximum" placeholder="90-139mmHg(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="heart_rate" class="form-label">心率</label>
+            <input type="text" class="form-control" id="heart_rate"  value="{{p.heart_rate}}" name="heart_rate" placeholder="60-100次/分钟(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="date" class="form-label">体检日期</label>
+            <input type="date" class="form-control" id="date" name="date"  value="{{p.date|date:"Y-m-d"}}">
+          </div>
+
+
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+          </div>
+        </form><!-- Vertical Form -->
+      </div>
+
+
+    </div><!-- End Default Tabs -->
+
+  </div>
+</div>
+
+
+{% endblock %}

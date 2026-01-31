@@ -1,0 +1,135 @@
+{% extends "admin_base.html" %}
+{% block title %}
+健康档案管理
+{% endblock %}
+
+{% block subtitle %}
+健康档案管理
+{% endblock %}
+
+{% block main %}
+健康档案管理
+{% endblock %}
+
+{% block content %}
+<section class="section profile">
+  <div class="row">
+    <section class="section">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title"></div>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>用户编号</th>
+                    <th>姓名</th>
+                    <th>身高</th>
+                    <th>体重</th>
+                    <th>药物过敏史</th>
+                    <th>疾病史</th>
+                    <th>是否残疾</th>
+                    <th>常用药</th>
+                    <th>操作</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                  {% for userinfo in userinfos %}
+                  <tr>
+                    <td>{{ userinfo.infoid }}</td>
+                    <td>{{ userinfo.user_name }}</td>
+                    <td>{{ userinfo.user_height }}</td>
+                    <td>{{ userinfo.user_weight }}</td>
+                    <td>{{ userinfo.allergy }}</td>
+                    <td>{{ userinfo.illness }}</td>
+                    <td>{{ userinfo.disability }}</td>
+                    <td>{{ userinfo.common_drugs }}</td>
+                    <td>
+                      <a type="button" class="btn btn-outline-info btn-sm" href="{% url 'adminApp:ehi' userinfo.infoid %}">编辑</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>用户编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>血糖</th>
+                    <th>总胆固醇</th>
+                    <th>甘油三酯</th>
+                    <th>低压</th>
+                    <th>高压</th>
+                    <th>心率</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for pEinfo in pEinfos %}
+                  <tr>
+                    <td>{{ pEinfo.PEid }}</td>
+                    <td>{{ pEinfo.user_name }}</td>
+                    <td>{{ pEinfo.user_sex }}</td>
+                    <td>{{ pEinfo.blood_sugar }}</td>
+                    <td>{{ pEinfo.total_cholesterol }}</td>
+                    <td>{{ pEinfo.triglyceride }}</td>
+                    <td>{{ pEinfo.minimum }}</td>
+                    <td>{{ pEinfo.maximum }}</td>
+                      <td>{{ pEinfo.heart_rate }}</td>
+
+                    <td>
+                      <a type="button" class="btn btn-outline-info btn-sm" href="{% url 'adminApp:ehi1' pEinfo.PEid %}">编辑</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>用户编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>就诊科室</th>
+                    <th>主诉</th>
+                    <th>现病史</th>
+                    <th>既往史</th>
+                    <th>诊断</th>
+                    <th>处方药</th>
+                    <th>医嘱</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for visit in visits %}
+                  <tr>
+                    <td>{{ visit.vid }}</td>
+                    <td>{{ visit.user_name }}</td>
+                    <td>{{ visit.user_sex }}</td>
+                    <td>{{ visit.department }}</td>
+                    <td>{{ visit.chief_complaint }}</td>
+                    <td>{{ visit.HPI }}</td>
+                    <td>{{ visit.PH }}</td>
+                    <td>{{ visit.diagnose }}</td>
+                      <td>{{ visit.DA }}</td>
+
+
+
+                    <td>
+                      <a type="button" class="btn btn-outline-info btn-sm" href="{% url 'adminApp:ehi2' visit.vid %}">编辑</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

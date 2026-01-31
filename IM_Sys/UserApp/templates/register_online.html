@@ -1,0 +1,154 @@
+{% extends "user_base.html" %}
+{% block title %}
+线上挂号
+{% endblock %}
+
+{% block subtitle %}
+线上挂号
+{% endblock %}
+
+{% block main %}线上挂号{% endblock %}
+
+{% block content %}
+<!-- 挂号 -->
+
+<div class="col-lg-10">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">挂号信息填写</h5>
+
+      <!-- General Form Elements -->
+      <form method="post" action="{% url 'UserApp:register_online' %}">
+        {% csrf_token %}
+        <input type="hidden" class="form-control" value="{{ user.uid }}" name="uid">
+
+        <div class="row mb-3">
+          <label for="inputText" class="col-sm-2 col-form-label">姓名</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ user.user_name }}" disabled>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">性别</label>
+          <div class="col-sm-10">
+            <select class="form-select" aria-label="Default select example" disabled>
+              {% if user.user_sex == "1" %}
+              <option selected value="1">男</option>
+              <option value="2">女</option>
+              {% else %}
+              <option value="1">男</option>
+              <option selected value="2">女</option>
+              {% endif %}
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputText" class="col-sm-2 col-form-label">年龄</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ user.user_age }}" disabled>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputText" class="col-sm-2 col-form-label">电话号码</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ user.phone }}" disabled>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputText" class="col-sm-2 col-form-label">身份证号</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" value="{{ user.id_no }}" disabled>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">科室</label>
+          <div class="col-sm-10">
+            <select class="form-select" aria-label="Default select example" id="department">
+              <option selected=""></option>
+              {% for d in departments %}
+              <option value="{{ d.id }}">{{ d.d_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">挂号类型</label>
+          <div class="col-sm-10">
+            <select class="form-select" aria-label="Default select example" name="r_type">
+              <option selected=""></option>
+              <option value="急诊">急诊</option>
+              <option value="普通门诊">普通门诊</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">医生</label>
+          <div class="col-sm-10">
+            <select class="form-select" aria-label="Default select example" id="c_doctor" name="d_id">
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputDate" class="col-sm-2 col-form-label">挂号日期</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" name="date">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="inputTime" class="col-sm-2 col-form-label">时间段</label>
+          <div class="col-sm-10">
+            <select name="s_time" id="s_time">
+              {% for i in time_range %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+
+      </form><!-- End General Form Elements -->
+
+    </div>
+  </div>
+</div>
+<!-- 挂号结束 -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#department").on("change", function () {
+      var departmentId = $(this).val();
+      if (departmentId) {
+        $.ajax({
+          url: "{% url 'UserApp:get_doctors_by_department' 0 %}".replace('0', departmentId),
+          type: "GET",
+          success: function (data) {
+            var doctorOptions = '<option value="">请选择医生</option>';
+            for (var i = 0; i < data.length; i++) {
+              doctorOptions += '<option value="' + data[i].uid + '">' + data[i].doctor_name + '</option>';
+            }
+            $("#c_doctor").html(doctorOptions);
+          }
+        });
+      } else {
+        $("#c_doctor").html('<option value="">请选择医生</option>');
+      }
+    });
+  });
+</script>
+{% endblock %}

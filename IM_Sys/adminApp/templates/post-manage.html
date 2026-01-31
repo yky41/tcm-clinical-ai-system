@@ -1,0 +1,41 @@
+
+{% extends "admin_base.html" %}
+{% block title %}
+论坛管理
+{% endblock %}
+
+{% block subtitle %}
+论坛管理/历史帖子
+{% endblock %}
+
+
+{% block main %}论坛管理{% endblock %}
+{% block content %}
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="card">
+                    <div >{{post.post_title}}</div>
+                    <div>{{post.post_content}}</div>
+                    <div>评论</div>
+                    {% for c in comments %}
+                    <div style="background-color: aliceblue;margin-bottom: 10px">
+                        <div class="col-md-4">{{c.u_id.user_name}}</div>
+                        <div class="col-md-8">
+                            <p>{{c.content}}</p>
+                            <span>{{c.c_time}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}

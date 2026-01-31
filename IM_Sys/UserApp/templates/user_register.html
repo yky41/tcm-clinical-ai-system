@@ -1,0 +1,99 @@
+{% extends "user_base.html" %}
+{% block title %}
+我的预约
+{% endblock %}
+
+{% block subtitle %}
+我的预约
+{% endblock %}
+
+
+{% block main %}
+    我的预约
+{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">预约记录</h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>科室</th>
+                                        <th>挂号类型</th>
+                                        <th>医生</th>
+                                        <th>挂号日期</th>
+                                        <th>挂号时间段</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for mr in my_re %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{mr.u_id.user_name}}</td>
+                                        <td>{{mr.d_id.deid.d_name}}</td>
+                                        <td>{{mr.r_type}}</td>
+                                        <td>{{mr.d_id.doctor_name}}</td>
+                                        <td>{{mr.date|date:"Y-m-d"}}</td>
+                                        <td>{{mr.s_time}}--{{mr.end_time}}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-outline-danger btn-sm">
+                                                    <a href="{% url 'UserApp:user_register' %}?rid={{mr.r_id}}"
+                                                        style="color:#dc3545;">删除</a>
+                                                </button>
+                                                <span>|</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm">
+                                                    <a href="{% url 'UserApp:register_online' %}?rid={{mr.r_id}}"
+                                                        style="color:#dc3545;">修改</a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            // Listen for department change event
+            $('#department').change(function () {
+                var departmentId = $(this).val();
+                // Send AJAX request to get doctors for selected department
+                $.ajax({
+                    url: '/get_doctors/', // Replace with your backend endpoint
+                    method: 'GET',
+                    data: { departmentId: departmentId },
+                    success: function (data) {
+                        // Clear existing doctor options
+                        $('#doctor').empty();
+                        // Populate doctor options based on response data
+                        data.forEach(function (doctor) {
+                            $('#doctor').append($('<option>', {
+                                value: doctor.id,
+                                text: doctor.name
+                            }));
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,304 @@
+{% extends "doctor_base.html" %}
+{% block title %}
+线上咨询管理
+{% endblock %}
+{% block subtitle %}
+线上咨询管理
+{% endblock %}
+
+
+{% block main %}线上咨询管理{% endblock %}
+
+{% block content %}
+
+
+<section class="section">
+  <div class="row">
+
+    <div class="col-lg-3">
+
+      <!-- Card with an image on top -->
+      <div class="card">
+
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span6">
+              <div class="row-fluid">
+                <br>
+                <div style="margin-left: 5%">
+                  <h3 class="text-center">
+                    <span class="badge bg-info">咨询人基本信息</span>
+                  </h3>
+                  <br>
+                  <div class="textbox">
+                    姓名:{{consult.u_id.user_name}} 性别:{{consult.u_id.user_sex}} 年龄:{{consult.u_id.user_age}}
+                    残疾:{{userinfo.disability}}
+                  </div>
+
+                  <br>
+                  <div class="textbox">
+                    <div>药物过敏史</div>
+                    <p>{{userinfo.allergy}}</p>
+                  </div>
+
+                  <div class="textbox">
+                    <div>疾病史</div>
+                    <!-- <textarea type="text" id="pastHistory"></textarea> -->
+                    <p>{{userinfo.illness}}</p>
+                  </div>
+
+                  <div class="textbox">
+                    <div>常用药</div>
+                    <!-- <textarea type="text" id="medicine"></textarea> -->
+                    <p>{{userinfo.common_drugs}}</p>
+                  </div>
+                  <br>
+                </div>
+              </div>
+              <!-- 诊疗信息 -->
+              <div class="row-fluid">
+                <div class="span6">
+
+                  <div class="row-fluid">
+
+                    <br>
+                    <h3 class="text-center">
+
+                      <span class="badge bg-info">咨询内容</span>
+                    </h3>
+                    <br>
+                    <div class="text-center">
+
+                      咨询科室：{{consult.d_id.deid.d_name}}
+
+                    </div>
+                    <br>
+                    <div class="text-center">
+                      主诉：{{consult.target}}
+                    </div>
+                    <br>
+                    <div class="text-center">
+                      持续时长：{{consult.howlong}}
+                    </div>
+                    <br>
+                    <!-- <div class="text-center">
+                      既往史：<input type="text" id="date" style="width: 220px" readonly="readonly">
+                    </div> -->
+
+                    <br>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+    <!-- 写处方-->
+    <div class="col-lg-5">
+      <!-- Default Table -->
+      <div class="card">
+        <div class="card-body">
+
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span6">
+
+                <div class="row-fluid">
+                  <br>
+                  <h3 class="text-center">
+
+                    <span class="badge bg-info">电子处方笺</span>
+                  </h3>
+                  <br>
+                  <form action="{% url 'DoctorApp:online_consult' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="cid" value="{{consult.c_id}}">
+                    <div class="row text-center">
+
+                      <label for="old_pwd" class="col-md-4 col-lg-3 col-form-label">初步诊断</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="diagnosisResult" type="text" class="form-control" id="diagnosisResult">
+                      </div>
+                    </div>
+                    <br>
+                    <div style="font-size: 1.1rem">
+
+                      <img src="/static/img/Rp.jpg" style="width: 70px;height: 50px">
+                    </div>
+
+                    <div class=" text-center">
+                      <div class="row mb-3">
+                        <div class="col-sm-12">
+                          <textarea class="form-control" style="height: 330px" id="RP" name="RP"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button class="btn btn-info mybutton">提交</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- 处方药-->
+
+    <div class="col-lg-4">
+
+      <!-- Card with an image on top -->
+      <div class="card">
+
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span6">
+
+              <div class="row-fluid">
+                <div class="span3">
+                </div>
+                <br> <br>
+
+                <div style="margin-left: 5%">
+
+                  <h3 class="text-center">
+
+                    <span class="badge bg-info">处方药</span>
+                  </h3>
+                  <br>
+                  <div class="row text-center">
+
+                    <label for="old_pwd" class="col-md-4 col-lg-3 col-form-label">药品：</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="medicine2" type="text" class="form-control" id="medicine2">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row text-center">
+
+                    <label for="old_pwd" class="col-md-4 col-lg-3 col-form-label">规格：</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="specification" type="text" class="form-control" id="specification">
+                    </div>
+                  </div>
+
+                  <br>
+                  <div class="row text-center">
+
+                    <label for="old_pwd" class="col-md-4 col-lg-3 col-form-label">用法：</label>
+                    <div class="col-md-8 col-lg-9">
+                      <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                          <input type="text" id="usage" class="form-control">
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                          <select class="form-select drugMethod" id="drugMethod" data-placeholder="111">
+                            <option value=""></option>
+                            <option value="口服">口服</option>
+                            <option value="外用">外用</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 10px">
+                        <div class="col-md-8 col-lg-8">
+                          <select class="form-select drugNum" id="drugNum" data-placeholder=" ">
+                            <option value=""></option>
+                            <option value="每日一次">每日一次</option>
+                            <option value="每日两次">每日两次</option>
+                            <option value="每日三次">每日三次</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+                  </div>
+
+
+                  <div style="display: flex;">
+                    <div>
+                      <button class="btn btn-info mybutton" onclick="emptyDrugs()">清空
+                      </button>
+                    </div>
+                  </div>
+
+                  <div style="display: block;margin-top: 20px">
+                    <div>
+                      添加医嘱：
+                    </div>
+                    <div>
+                      <textarea id="medicalOrder" style="height: 80px;width: 100%" maxlength="15"></textarea>
+                    </div>
+                  </div>
+                  <div>
+                    <button class="btn btn-info mybutton" onclick="addDrugs()">添加
+                    </button>
+                  </div>
+
+                  <br>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        // 清空药品
+        var num = 0
+        function emptyDrugs() {
+          $("#medicine2").val('');
+          $("#specification").val('');
+          $("#usage").val('');
+          $("#drugMethod").val('');
+          $("#drugNum").val('');
+          $("#medicalOrder").val('');
+        }
+        // 添加药品
+        function addDrugs() {
+          medicine2 = $("#medicine2").val()// 药品
+          specification = $('#specification').val()// 规格
+          usage = $("#usage").val();//用法
+          drugMethod = $("#drugMethod").val();//服用方式
+          drugNum = $("#drugNum").val();//数量
+          medicalOrder = $("#medicalOrder").val();//医嘱
+          num = num + 1
+          r = "\n" + num + '.' + medicine2 + specification + '\n用法：' + usage + drugMethod + drugNum + '\n医嘱：' + medicalOrder
+
+          RP = $("#RP").val();//药方
+          $("#RP").val(RP + r)
+
+
+
+          emptyDrugs()
+
+
+        }
+      </script>
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+
+
+</section>
+{% endblock %}

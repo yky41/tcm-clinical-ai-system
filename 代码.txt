@@ -1,0 +1,8 @@
+
+python manage.py runserver
+python manage.py startapp yaofang
+
+#mysql问题
+win+r
+services.msc
+登陆

@@ -1,0 +1,547 @@
+{% extends "user_base.html" %}
+{% block title %}
+家庭档案记录管理
+{% endblock %}
+
+{% block subtitle %}
+家庭档案记录管理
+{% endblock %}
+
+{% block main %}家庭档案记录{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+
+<!--表格健康档案-->
+<section class="section profile">
+  <div class="row">
+    <div class="col-lg-8">
+
+
+      <div class="btn-group">
+        <form action="{% url 'UserApp:family_manage' %}" method="get">
+
+          <select name="rid" id="relative" class="btn btn-primary dropdown-toggle">
+            {% for r in relatives%}
+            {% if rid == r.id %}
+            <option value="{{r.id}}" selected>{{r.relationship}}</option>
+            {% else %}
+            <option value="{{r.id}}">{{r.relationship}}</option>
+            {% endif %}
+            {% empty %}
+            <option value="">暂无请先添加</option>
+            {% endfor %}
+          </select>
+          <input type="submit" />
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+
+
+
+  <div class="col-lg-12">
+
+    <div class="card">
+      <div class="card-body pt-3">
+        <!-- Bordered Tabs -->
+
+        <ul class="nav nav-tabs nav-tabs-bordered">
+
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">信息</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">编辑</button>
+          </li>
+
+
+
+        </ul>
+        <div class="tab-content pt-2">
+
+          <div class="tab-pane fade show active profile-overview" id="profile-overview">
+            <!--                  <h5 class="card-title">About</h5>-->
+            <!--                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>-->
+            {% if relative %}
+            <h5 class="card-title">家人基本信息</h5>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">与本人关系</div>
+              <div class="col-lg-9 col-md-8">{{relative.relationship}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">姓名</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_name}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">性别</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_sex}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">年龄</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_age}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">身高</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_height}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">体重</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_weight}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">药物过敏史</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_allergy}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">疾病</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_illness}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">残疾</div>
+              <div class="col-lg-9 col-md-8">{{relative.disability}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">手术情况</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_surgery}}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">外伤情况</div>
+              <div class="col-lg-9 col-md-8">{{relative.relative_injury}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">常用药</div>
+              <div class="col-lg-9 col-md-8">{{relative.common_drugs}}</div>
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+            <!-- Profile Edit Form -->
+            <form action="{% url 'UserApp:family_manage'%}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="rid" value="{{relative.id}}">
+
+
+              <div class="row mb-3">
+                <label for="relative_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_name" type="text" class="form-control" id="relative_name"
+                    value="{{relative.relative_name}}">
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label for="relative_sex" class="col-md-4 col-lg-3 col-form-label">性别</label>
+                <div class="col-md-8 col-lg-9">
+                  <input id="relative_sex" class="form-control" name="relative_sex" value="{{relative.relative_sex}}" />
+                  <!-- <option selected>男</option>
+                    <option>女</option> -->
+                </div>
+
+              </div>
+
+              <div class="row mb-3">
+                <label for="relative_age" class="col-md-4 col-lg-3 col-form-label">年龄</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_age" type="text" class="form-control" id="relative_age"
+                    value="{{relative.relative_age}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="relative_height" class="col-md-4 col-lg-3 col-form-label">身高</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_height" type="text" class="form-control" id="relative_height"
+                    value="{{relative.relative_height}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="relative_weight" class="col-md-4 col-lg-3 col-form-label">体重</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_weight" type="text" class="form-control" id="relative_weight"
+                    value="{{relative.relative_weight}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="relative_allergy" class="col-md-4 col-lg-3 col-form-label">药物过敏史</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_allergy" type="text" class="form-control" id="relative_allergy"
+                    value="{{relative.relative_allergy}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="relative_illness" class="col-md-4 col-lg-3 col-form-label">疾病</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_illness" type="text" class="form-control" id="relative_illness"
+                    value="{{relative.relative_illness}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="disability" class="col-md-4 col-lg-3 col-form-label">残疾</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="disability" type="text" class="form-control" id="disability"
+                    value="{{relative.disability}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="relative_surgery" class="col-md-4 col-lg-3 col-form-label">手术情况</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_surgery" type="text" class="form-control" id="relative_surgery"
+                    value="{{relative.relative_surgery}}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="relative_injury" class="col-md-4 col-lg-3 col-form-label">外伤情况</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="relative_injury" type="text" class="form-control" id="relative_injury"
+                    value="{{relative.relative_injury}}">
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label for="common_drugs" class="col-md-4 col-lg-3 col-form-label">常用药</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="common_drugs" type="text" class="form-control" id="common_drugs"
+                    value="{{relative.common_drugs}}">
+                </div>
+              </div>
+
+
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">保存</button>
+              </div>
+            </form><!-- End Profile Edit Form -->
+
+          </div>
+          {% else %}
+          暂无亲属信息，请先<a href="{% url 'UserApp:family_add' %}">添加</a>
+          {% endif %}
+
+
+
+
+        </div><!-- End Bordered Tabs -->
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+
+<!--    个人基本信息记录修改 -->
+<section class="section">
+  <div class="row">
+
+
+
+    <div class="col-xl-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">历史基本家人信息</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>姓名</th>
+                  <th>关系</th>
+                  <th>性别</th>
+                  <th>年龄</th>
+                  <th>身高</th>
+                  <th>体重</th>
+                  <th>药物过敏史</th>
+                  <th>疾病史</th>
+                  <th>是否残疾</th>
+                  <th>手术</th>
+                  <th>外伤</th>
+                  <th>常用药</th>
+                  <th>添加日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for r in relatives %}
+                <tr>
+
+                  <td>{{r.id}}</td>
+                  <td>{{r.relative_name}}</td>
+                  <td>{{r.relationship}}</td>
+                  <td>{{r.relative_sex}}</td>
+                  <td>{{r.relative_age}}</td>
+                  <td>{{r.relative_height}}</td>
+                  <td>{{r.relative_weight}}</td>
+                  <td>{{r.relative_allergy}}</td>
+                  <td>{{r.relative_illness}}</td>
+                  <td>{{r.disability}}</td>
+                  <td>{{r.relative_surgery}}</td>
+                  <td>{{r.relative_injury}}</td>
+                  <td>{{r.common_drugs}}</td>
+                  <td>{{r.c_time}}</td>
+
+                  <!--                        <td>2</td>-->
+                  <td>
+                    <div class="btn-group">
+                      <!--                            <a class="btn btn-info rounded-pill" href="#!" title="" data-toggle="tooltip" data-original-title="编辑"><i class="mdi mdi-pencil"></i></a>-->
+                      <!--                            <a class = "btn btn-outline-danger btn-sm"><button type="button" class="btn btn-outline-danger btn-sm">删除</button></a>-->
+                      <button type="button" class="btn btn-outline-danger btn-sm"><a href="{% url 'UserApp:family_manage' %}?rid={{r.id}}&type=info" style="color:#dc3545;">删除</a></button>
+                      <!-- <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button> -->
+                      <!--                            <a class="btn btn-xs btn-default" href="#!" title="" data-toggle="tooltip" data-original-title="查看"><i class="mdi mdi-eye"></i></a>-->
+                      <!--                            <a class="btn btn-xs btn-default" href="#!" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-window-close"></i></a>-->
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+
+
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+<!--    个人基本信息修改 end-->
+
+<!-- <section class="section">
+  <div class="row">
+    <div class="col-lg-20">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">历史体检记录</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+
+                  <th>编号</th>
+                  <th>检查医院</th>
+                  <th>检查项目</th>
+                  <th>血糖</th>
+                  <th>总胆固醇</th>
+                  <th>甘油三酯</th>
+                  <th>低压</th>
+                  <th>高压</th>
+                  <th>心率</th>
+                  <th>检查日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+
+                  <td>1</td>
+                  <td>张三</td>
+                  <td>男</td>
+                  <td>26</td>
+                  <td>175</td>
+                  <td>70</td>
+                  <td>头孢</td>
+                  <td>高血压、糖尿病</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                  </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>李四</td>
+                  <td>女</td>
+                  <td>22</td>
+                  <td>165</td>
+                  <td>50</td>
+                  <td>无</td>
+                  <td>过敏性鼻炎</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>王五</td>
+                  <td>男</td>
+                  <td>30</td>
+                  <td>185</td>
+                  <td>80</td>
+                  <td>无</td>
+                  <td>无</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="section">
+  <div class="row">
+    <div class="col-lg-20">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">历史诊疗信息</h5>
+
+          
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                 
+                  <th>诊疗编号</th>
+                  <th>就诊科室</th>
+                  <th>主诉</th>
+                  <th>现病史</th>
+                  <th>既往史</th>
+                  <th>诊断</th>
+                  <th>处方药</th>
+                  <th>医嘱</th>
+                  <th>就诊日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>张三</td>
+                  <td>男</td>
+                  <td>26</td>
+                  <td>175</td>
+                  <td>70</td>
+                  <td>头孢</td>
+                  <td>高血压、糖尿病</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                       <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+
+                  <td>2</td>
+                  <td>李四</td>
+                  <td>女</td>
+                  <td>22</td>
+                  <td>165</td>
+                  <td>50</td>
+                  <td>无</td>
+                  <td>过敏性鼻炎</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+
+                  <td>3</td>
+                  <td>王五</td>
+                  <td>男</td>
+                  <td>30</td>
+                  <td>185</td>
+                  <td>80</td>
+                  <td>无</td>
+                  <td>无</td>
+
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+
+{% endblock %}

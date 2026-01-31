@@ -1,0 +1,469 @@
+{% extends "user_base.html" %}
+{% block title %}
+首页
+{% endblock %}
+{% block content %}
+<!--表格健康档案-->
+<section class="section profile">
+  <div class="row">
+    <div class="col-xl-4">
+
+      <div class="card">
+        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+          <!-- <img src="/static/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+          <h2>Patient 1</h2>
+          <h3>Web Designer</h3>
+          <h5>邮箱</h5>
+          <div class="social-links mt-2">
+            <!--                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>-->
+            <!--                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>-->
+            <!--                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>-->
+            <!--                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>-->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-xl-8">
+
+      <div class="card">
+        <div class="card-body pt-3">
+          <!-- Bordered Tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered">
+
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change
+                Password</button>
+            </li>
+
+          </ul>
+          <div class="tab-content pt-2">
+
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <!--                  <h5 class="card-title">About</h5>-->
+              <!--                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>-->
+
+              <h5 class="card-title">个人基本信息</h5>
+
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label ">姓名</div>
+                <div class="col-lg-9 col-md-8">Patient 1</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">性别</div>
+                <div class="col-lg-9 col-md-8">男</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">年龄</div>
+                <div class="col-lg-9 col-md-8">26</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">身高</div>
+                <div class="col-lg-9 col-md-8">178</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">体重</div>
+                <div class="col-lg-9 col-md-8">75</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">药物过敏史</div>
+                <div class="col-lg-9 col-md-8">头孢</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">疾病</div>
+                <div class="col-lg-9 col-md-8">高血压、糖尿病</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">残疾</div>
+                <div class="col-lg-9 col-md-8">无</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">常用药</div>
+                <div class="col-lg-9 col-md-8">二甲双弧</div>
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+              <!-- Profile Edit Form -->
+              <form>
+                <div class="row mb-3">
+                  <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                  <div class="col-md-8 col-lg-9">
+                    <!-- <img src="/static/img/profile-img.jpg" alt="Profile"> -->
+                    <div class="pt-2">
+                      <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                          class="bi bi-upload"></i></a>
+                      <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
+                          class="bi bi-trash"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="fullName" type="text" class="form-control" id="fullName" value="Patient1">
+                  </div>
+                </div>
+
+                <!--                    <div class="row mb-3">-->
+                <!--                      <label for="about" class="col-md-4 col-lg-3 col-form-label">性别</label>-->
+                <!--                      <div class="col-md-8 col-lg-9">-->
+                <!--                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>-->
+                <!--                      </div>-->
+                <!--                    </div>-->
+                <div class="row mb-3">
+                  <label for="company" class="col-md-4 col-lg-3 col-form-label">性别</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="company" type="text" class="form-control" id="company" value="男">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="company" class="col-md-4 col-lg-3 col-form-label">年龄</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="company" type="text" class="form-control" id="company" value="26">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Job" class="col-md-4 col-lg-3 col-form-label">身高</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="job" type="text" class="form-control" id="Job" value="178">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Country" class="col-md-4 col-lg-3 col-form-label">体重</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="country" type="text" class="form-control" id="Country" value="75">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Address" class="col-md-4 col-lg-3 col-form-label">药物过敏史</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="address" type="text" class="form-control" id="Address" value="头孢">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Phone" class="col-md-4 col-lg-3 col-form-label">疾病</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="phone" type="text" class="form-control" id="Phone" value="高血压、糖尿病">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Email" class="col-md-4 col-lg-3 col-form-label">残疾</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="email" type="email" class="form-control" id="Email" value="无">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">常用药</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="twitter" type="text" class="form-control" id="Twitter" value="二甲双弧">
+                  </div>
+                </div>
+
+
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form><!-- End Profile Edit Form -->
+
+            </div>
+
+            <div class="tab-pane fade pt-3" id="profile-settings">
+
+              <!-- Settings Form -->
+              <form>
+
+                <div class="row mb-3">
+                  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+                  <div class="col-md-8 col-lg-9">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="changesMade" checked="">
+                      <label class="form-check-label" for="changesMade">
+                        Changes made to your account
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="newProducts" checked="">
+                      <label class="form-check-label" for="newProducts">
+                        Information on new products and services
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="proOffers">
+                      <label class="form-check-label" for="proOffers">
+                        Marketing and promo offers
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="securityNotify" checked="" disabled="">
+                      <label class="form-check-label" for="securityNotify">
+                        Security alerts
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form><!-- End settings Form -->
+
+            </div>
+
+            <div class="tab-pane fade pt-3" id="profile-change-password">
+              <!-- Change Password Form -->
+              <form>
+
+                <div class="row mb-3">
+                  <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="password" type="password" class="form-control" id="currentPassword">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="newpassword" type="password" class="form-control" id="newPassword">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+              </form><!-- End Change Password Form -->
+
+            </div>
+
+          </div><!-- End Bordered Tabs -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!--   健康档案结束   -->
+
+<!--  <div class="card-body">-->
+
+<!--<div class="card">-->
+<!--      <div class="card-body">-->
+<!--        <h6 class="card-title">基本信息</h6>-->
+
+
+
+
+<!--    <div class="card">-->
+<!--      <div class="card-body">-->
+<!--        <h6 class="card-title">诊疗信息</h6>-->
+
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-20">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">体检信息</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <!--                        <th>-->
+                  <!--                          <label class="lyear-checkbox checkbox-primary">-->
+                  <!--                            <input type="checkbox" id="check-all"><span></span>-->
+                  <!--                          </label>-->
+                  <!--                        </th>-->
+                  <th>编号</th>
+                  <th>检查医院</th>
+                  <th>检查项目</th>
+                  <th>血糖</th>
+                  <th>总胆固醇</th>
+                  <th>甘油三酯</th>
+                  <th>低压</th>
+                  <th>高压</th>
+                  <th>心率</th>
+                  <th>检查日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <!--                        <td>-->
+                  <!--                          <label class="lyear-checkbox checkbox-primary">-->
+                  <!--                            <input type="checkbox" name="ids[]" value="1"><span></span>-->
+                  <!--                          </label>-->
+                  <!--                        </td>-->
+                  <td>1</td>
+                  <td>张三</td>
+                  <td>男</td>
+                  <td>26</td>
+                  <td>175</td>
+                  <td>70</td>
+                  <td>头孢</td>
+                  <td>高血压、糖尿病</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+                  <!--                        <td>2</td>-->
+                  <td>
+                    <div class="btn-group">
+                      <!--                            <a class="btn btn-info rounded-pill" href="#!" title="" data-toggle="tooltip" data-original-title="编辑"><i class="mdi mdi-pencil"></i></a>-->
+                      <!--                            <a class = "btn btn-outline-danger btn-sm"><button type="button" class="btn btn-outline-danger btn-sm">删除</button></a>-->
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                      <!--                            <a class="btn btn-xs btn-default" href="#!" title="" data-toggle="tooltip" data-original-title="查看"><i class="mdi mdi-eye"></i></a>-->
+                      <!--                            <a class="btn btn-xs btn-default" href="#!" title="" data-toggle="tooltip" data-original-title="删除"><i class="mdi mdi-window-close"></i></a>-->
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <!--                        <td>-->
+                  <!--                          <label class="lyear-checkbox checkbox-primary">-->
+                  <!--                            <input type="checkbox" name="ids[]" value="2"><span></span>-->
+                  <!--                          </label>-->
+                  <!--                        </td>-->
+                  <td>2</td>
+                  <td>李四</td>
+                  <td>女</td>
+                  <td>22</td>
+                  <td>165</td>
+                  <td>50</td>
+                  <td>无</td>
+                  <td>过敏性鼻炎</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <!--                        <td>-->
+                  <!--                          <label class="lyear-checkbox checkbox-primary">-->
+                  <!--                            <input type="checkbox" name="ids[]" value="3"><span></span>-->
+                  <!--                          </label>-->
+                  <!--                        </td>-->
+                  <td>3</td>
+                  <td>王五</td>
+                  <td>男</td>
+                  <td>30</td>
+                  <td>185</td>
+                  <td>80</td>
+                  <td>无</td>
+                  <td>无</td>
+                  <td>无</td>
+                  <td>2023/02/28</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm">删除</button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm">修改</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-20">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">诊疗信息</h5>
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </section>
+</section>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "patient_manage.html" %}
+{% block title %}
+编辑医生信息
+{% endblock %}
+
+{% block subtitle %}
+编辑医生信息
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <form action="{% url 'adminApp:user_manage2' %}?uid={{ user.uid }}" method="post">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+              <label for="doctor_name" class="col-md-4 col-lg-3 col-form-label">修改姓名</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_name" type="text" class="form-control" id="user_name" value="{{ user.user_name }}">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="user_sex" class="col-md-4 col-lg-3 col-form-label">修改性别</label>
+              <div class="col-md-8 col-lg-9">
+                <select id="user_sex" class="form-select" name="user_sex">
+                  {% if user.user_sex == '男' %}
+                  <option selected>男</option>
+                  <option>女</option>
+                  {% else %}
+                  <option>男</option>
+                  <option selected>女</option>
+                  {% endif %}
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="doctor_age" class="col-md-4 col-lg-3 col-form-label">修改年龄</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_age" type="text" class="form-control" id="user_age" value="{{ user.user_age }}">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="email" class="col-md-4 col-lg-3 col-form-label">修改邮箱</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="email" type="text" class="form-control" id="email" value="{{ user.email }}">
+              </div>
+            </div>
+
+          <div class="row mb-3">
+              <label for="doctor_name" class="col-md-4 col-lg-3 col-form-label">修改密码</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="password" type="text" class="form-control" id="password" value="{{ user.password }}">
+              </div>
+            </div>
+
+
+
+
+          <div class="row mb-3">
+                  <label for="deid" class="col-md-4 col-lg-3 col-form-label">所属科室</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select class="form-select" aria-label="Default select example" id="deid" name="deid">
+                      <!-- <option selected=""></option> -->
+                      {% for d in departments %}
+                      {% if d.id == user.deid %}
+                      <option value={{d.id}} selected>{{d.d_name}}</option>
+                      {% else %}
+                      <option value={{d.id}}>{{d.d_name}}</option>
+                      {% endif %}
+
+                      {% endfor %}
+                    </select>
+
+                  </div>
+                </div>
+
+
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

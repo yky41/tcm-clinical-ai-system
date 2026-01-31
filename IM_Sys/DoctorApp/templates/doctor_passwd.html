@@ -1,0 +1,119 @@
+
+{% extends "doctor_base.html" %}
+{% block title %}
+修改密码
+{% endblock %}
+{% block subtitle %}
+修改密码
+{% endblock %}
+
+
+{% block main %}修改密码{% endblock %}
+
+{% block content %}
+
+<section class="section profile">
+  <div class="row">
+    <!--            头像结束-->
+    <div class="col-lg-11">
+      <div class="card">
+        <div class="card-body pt-3">
+          <!-- Bordered Tabs -->
+          <div class="tab-content pt-2">
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <!-- Change Password Form -->
+              <div >
+                {% csrf_token %}
+                <div class="row mb-3">
+                  <label for="old_pwd" class="col-md-4 col-lg-3 col-form-label">旧密码</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="old_pwd" type="password" class="form-control" id="old_pwd">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="new_pwd" class="col-md-4 col-lg-3 col-form-label">新密码</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="new_pwd" type="password" class="form-control" id="new_pwd">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="new_pwd1" class="col-md-4 col-lg-3 col-form-label">确认新密码</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="new_pwd1" type="password" class="form-control" id="new_pwd1">
+                  </div>
+                </div>
+                <div class="row mb-3" >
+                  <div class="col-md-4 col-lg-4"></div>
+                  <div class="col-md-4 col-lg-4" id="message"></div>
+                  <div class="col-md-4 col-lg-4"></div>
+                </div>
+
+                <div class="text-center">
+                  <button  class="btn btn-primary" id="butchangepwd">修改密码</button>
+                </div>
+              </div>
+              <!-- End Change Password Form -->
+              <script>
+                $(function () {
+                  $("#butchangepwd").click(function () {
+                    // 获取用户名和密码
+                    var cp = $("#old_pwd").val();//旧密码
+                    var p1= $("#new_pwd").val();//新密码
+                    var p2 = $("#new_pwd1").val();//二次输入
+                    if (cp==p1){
+                      $("#message").html('<div class="alert alert-danger">新密码不能和旧密码一致</div>')
+                      // alert(11111)
+                      return 
+                    }
+                    if (p1!=p2){
+                      $("#message").html('<div class="alert alert-danger">两次输入的密码不一致</div>')
+                      // alert(11111)
+                      return 
+                    }
+                    
+                    // 此参数需要传递给后端,否则会csrf禁止,报403错误
+                    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+                    // 发起ajax请求
+                    $.ajax({
+                      url: "/doctor/change_pwd/",  // 请求的地址
+                      type: "post",  // 请求方式
+                      // 请求时传递过去的数据
+                      data: { "old_pwd": cp, "new_pwd": p1,"new_pwd": p2, 'csrfmiddlewaretoken': csrf },
+                      dataType: "json",  // 返回的数据格式
+                      async: true,  // 异步的ajax
+                    }).success(function (data) {
+                      if (data.res == 2) {
+                        // 请求成功实现页面跳转
+                        $("#message").html('<div class="alert alert-success">'+data.info+'</div>');
+                      }
+                      else if (data.res == 1) {
+                        // 请求失败，显示错误信息
+                        $("#message").show();
+                        $("#message").html('<div class="alert alert-danger">'+data.info+'</div>');
+                      }
+                      else if (data.res == 0) {
+                        // 请求失败，显示错误信息
+                        $("#message").show();
+                        $("#message").html('<div class="alert alert-danger">'+data.info+'</div>');
+                      }
+
+                    })
+                  })
+                })
+              </script>
+
+            </div>
+
+          </div><!-- End Bordered Tabs -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

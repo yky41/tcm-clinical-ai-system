@@ -1,0 +1,111 @@
+
+{% extends "admin_base.html" %}
+{% block title %}
+普通用户管理
+{% endblock %}
+
+{% block subtitle %}
+用户权限管理/普通用户管理
+{% endblock %}
+
+
+{% block main %}普通用户管理{% endblock %}
+
+{% block content %}
+
+
+<section class="section profile">
+  <div class="row">
+
+
+    <!--    个人基本信息记录修改 -->
+    <section class="section">
+      <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card">
+            <div class="card-body">
+              <!-- <h5 class="card-title">
+                <a class="btn btn-danger" href="#!"><i class="mdi mdi-window-close"></i> 批量注销</a>
+              </h5> -->
+
+              <div class="card-title"></div>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <!-- <th>
+                        <label class="lyear-checkbox checkbox-primary">
+                          <input type="checkbox" id="check-all"><span></span>
+                        </label>
+                      </th> -->
+                      <th>用户编号</th>
+                      <th>姓名</th>
+                      <th>性别</th>
+                      <th>年龄</th>
+                      <th>邮箱</th>
+
+                      <th>注册日期</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for user in users %}
+
+                    <tr>
+
+                      <!-- <td>
+                        <label class="lyear-checkbox checkbox-primary">
+                          <input type="checkbox" name="ids[]" value="1"><span></span>
+                        </label>
+                      </td> -->
+                      <td>{{user.uid}}</td>
+                      <td>{{user.user_name}}</td>
+                      <td>{{user.user_sex}}</td>
+                      <td>{{user.user_age}}</td>
+                      <td>{{user.email}}</td>
+
+                      <td>{{user.c_time}}</td>
+                      {% if user.states %}
+                      <td>
+
+                        正常
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <a type="button" class="btn btn-outline-danger btn-sm" href="{% url 'adminApp:user_manage' %}?uid={{user.uid}}">注销</a>
+                        </div>
+                      <a type="button" class="btn btn-outline-info btn-sm" href="{% url 'adminApp:user_manage2' %}?uid={{user.uid}}">编辑</a>
+                      </td>
+                      {% else %}
+                      <td>
+
+                        已注销
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <a type="button" class="btn btn-outline-danger btn-sm" href="{% url 'adminApp:user_manage1' %}?uid={{user.uid}}">取消注销</a>
+                        </div>
+                      </td>
+
+
+
+                      {% endif %}
+
+
+
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</section>
+
+{% endblock %}

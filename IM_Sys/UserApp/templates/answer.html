@@ -1,0 +1,118 @@
+{% extends "user_base.html" %}
+{% block title %}
+智能诊断
+{% endblock %}
+
+{% block subtitle %}
+智能诊断
+{% endblock %}
+
+{% block main %}智能诊断{% endblock %}
+
+{% block header %}
+<style>
+    .msgshow {
+        height: 450px;
+        border-bottom: 1px solid rgb(136, 133, 133);
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+    }
+    .input-box {
+        height: 150px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .answer {
+        align-self: flex-start;
+        border-radius: 5px;
+        background-color: rgb(221, 235, 219);
+        padding: 8px;
+    }
+    .user {
+        border-radius: 5px;
+        background-color: rgb(97, 230, 80);
+        padding: 8px;
+        align-self: flex-end;
+    }
+    .but {
+        height: 65px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 20px;
+        align-items: center;
+    }
+    button {
+        border: none;
+        background-color: rgb(25, 225, 65);
+        width: 70px;
+        height: 30px;
+        border-radius: 6px;
+    }
+    .add-prescription-button {
+        background-color: rgb(25, 225, 65);
+        color: white;
+        border: none;
+        width: 70px;
+        height: 30px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    function sendmsg() {
+        var msg = $(".input-box").text().trim();
+        if (!msg) return;  // 如果输入框为空，则不发送
+        var msg_dom = $('<p class="user">' + msg + '</p>');
+        $(".msgshow").append(msg_dom);
+        $('.input-box').text('');
+        var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+        $.ajax({
+            url: "{% url 'UserApp:answer' %}",
+            type: "post",
+            data: { "msg": msg, 'csrfmiddlewaretoken': csrf },
+            dataType: "json",
+        }).done(function(data) {
+            var answer_dom = $('<p class="answer">' + data.answer + '</p>');
+            $(".msgshow").append(answer_dom);
+            // 检查是否有 additional_question 并显示
+            if (data.additional_question) {
+                var additional_question_dom = $('<p class="answer">' + data.additional_question + '</p>');
+                $(".msgshow").append(additional_question_dom);
+            }
+            // 滚动到底部
+            $(".msgshow").scrollTop($(".msgshow")[0].scrollHeight);
+        }).fail(function() {
+            alert("消息发送失败，请重试。");
+        });
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">智能诊断</h5>
+
+                    <!-- 消息框 -->
+                    {% csrf_token %}
+                    <div class="msgshow">
+                        <p class="answer">欢迎使用本系统，问诊请输入1，查询药方与特定病情治疗药物请输入2</p>
+                    </div>
+                </div>
+                <!-- 输入框 -->
+                <div class="input-box" contenteditable></div>
+                <div class="but">
+                    <button onclick="sendmsg()">发送</button>
+                    <button class="add-prescription-button" onclick="location.href='{% url 'UserApp:add_prescription' %}'">增加新药方</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

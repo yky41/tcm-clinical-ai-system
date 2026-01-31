@@ -1,0 +1,94 @@
+
+{% extends "doctor_base.html" %}
+{% block title %}
+线上咨询管理
+{% endblock %}
+{% block subtitle %}
+线上咨询管理
+{% endblock %}
+
+
+{% block main %}线上咨询管理{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+<!--表格健康档案-->
+<section class="section profile">
+  <div class="row">
+
+    <section class="section">
+      <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">咨询记录</h5>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>咨询编号</th>
+                      <th>姓名</th>
+                      <th>性别</th>
+                      <th>年龄</th>
+                      <th>电话号</th>
+                      
+                      <th>处方号</th>
+                      
+                      <th>状态</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in consults %}
+                    <tr>
+
+                      <td>{{forloop.counter}}</td>
+                      <td>{{i.u_id.user_name}}</td>
+                      <td>{{i.u_id.user_sex}}</td>
+                      <td>{{i.u_id.user_age}}</td>
+                      <td>{{i.u_id.phone}}</td>
+                      {% if i.r_id.recipe_id %}
+                      <td><a href="{% url 'DoctorApp:online_consult'%}?cid={{i.c_id}}&type=show">{{i.r_id.recipe_id}}</a></td>
+
+                      {% else %}
+                      <td>还未处理，没有处方号</td>
+
+                      {% endif %}
+                      <td>
+                        <div class="btn-group">
+                          {% if i.status == 0 %}
+                          <a type="button" href="{% url 'DoctorApp:online_consult'%}?cid={{i.c_id}}" class="btn btn-danger btn-sm"><i
+                              class="bi bi-exclamation-octagon"></i>未完成,去处理</a>
+
+                          {% endif %}
+                          {% if i.status == 1 %}
+
+                          <span type="button"  class="btn btn-success btn-sm"><i
+                              class="bi bi-check-circle"></i>已完成</span>
+
+                          {% endif %}
+
+
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</section>
+
+{% endblock %}

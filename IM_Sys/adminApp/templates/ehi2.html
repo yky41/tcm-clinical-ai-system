@@ -1,0 +1,87 @@
+{% extends "info_manage.html" %}
+{% block title %}
+就诊记录
+{% endblock %}
+
+{% block subtitle %}
+就诊记录
+{% endblock %}
+
+{% block main %}
+就诊记录
+{% endblock %}
+
+{% block content %}
+<section class="section profile">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">就诊记录</h5>
+          <form action="{% url 'adminApp:ehi2' visit.vid %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <label for="user_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_name" type="text" class="form-control" id="user_name" value="{{ visit.user_name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="user_sex" class="col-md-4 col-lg-3 col-form-label">身高</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_sex" type="text" class="form-control" id="user_sex" value="{{ visit.user_sex }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="department" class="col-md-4 col-lg-3 col-form-label">科室</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="department" type="text" class="form-control" id="department" value="{{visit.department }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="chief_complaint" class="col-md-4 col-lg-3 col-form-label">主诉</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="chief_complaint" type="text" class="form-control" id="allergy" value="{{ visit.chief_complaint }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="HPI" class="col-md-4 col-lg-3 col-form-label">现病史</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="HPI" type="text" class="form-control" id="HPI" value="{{ visit.HPI }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="PH" class="col-md-4 col-lg-3 col-form-label">既往史</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="PH" type="text" class="form-control" id="PH" value="{{ visit.PH }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="diagnose" class="col-md-4 col-lg-3 col-form-label">诊断</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="diagnose" type="text" class="form-control" id="diagnose" value="{{ visit.diagnose }}">
+              </div>
+            </div>
+              <div class="row mb-3">
+              <label for="DA" class="col-md-4 col-lg-3 col-form-label">医嘱</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="DA" type="text" class="form-control" id="DA" value="{{ visit.DA }}">
+              </div>
+            </div>
+              <div class="row mb-3">
+              <label for="prescription" class="col-md-4 col-lg-3 col-form-label">处方药</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="prescription" type="text" class="form-control" id="prescription" value="{{ visit.prescription }}">
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">保存修改</button>
+            </div>
+          </form><!-- End Profile Edit Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

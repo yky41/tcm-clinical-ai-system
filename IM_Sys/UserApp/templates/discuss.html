@@ -1,0 +1,229 @@
+{% extends "user_base.html" %}
+{% block title %}
+论坛
+{% endblock %}
+
+{% block subtitle %}
+论坛
+{% endblock %}
+
+
+{% block main %}论坛{% endblock %}
+
+{% block content %}
+
+<div class="pagetitle">
+  <nav>
+    <div class="search-bar" style="display: inline-flex;">
+      <form class="search-form d-flex align-items-center" method="get" action="{% url 'UserApp:blog' %}">
+          <input type="text" name="q" placeholder="搜索帖子" title="Enter search keyword" value="{{q}}">
+          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+    <!-- 发帖开始 -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+      我要发帖
+    </button>
+    <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">我要发帖</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- contact开始 -->
+            <div class="col-xl-12">
+              <div class="card p-4">
+
+                <form action="{% url 'UserApp:blog'%}" method="post">
+                  <span class="loading error-message sent-message"></span>
+                  {% csrf_token %}
+                  <div class="row gy-4">
+                    <input type="hidden" value="add" name="type">
+
+                    <div class="col-md-12">
+                      <input type="text" name="title" class="form-control" placeholder="标题" required="">
+                    </div>
+
+                    <div class="col-md-12">
+                      <textarea class="form-control" name="content" rows="6" placeholder="内容" required=""></textarea>
+                    </div>
+
+                    <!-- contact结束 -->
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">发布</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- 发帖结束 -->
+        </div>
+      </div>
+    </div>
+
+  </nav>
+</div><!-- End Page Title -->
+
+
+
+<!-- 新闻开始 -->
+
+
+<section class="section">
+
+  <div class="row">
+    <!-- 一条帖子 -->
+    {% if q %}
+    <p>题目中包含“{{q}}”的帖子如下</p>
+    {% endif %}
+    
+    {% for p in posts %}
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <!-- 头像开始 -->
+            <div style="display: inline;">
+              <!-- <img src="/static/img/profile-img.jpg" alt="Profile" class="rounded-circle" style="width: 60px;"> -->
+            </div>
+            <!-- 头像结束 -->
+            <h5 style="display: inline;">{{p.u_id.user_name}}</h5>
+            <span style="display: inline;"> | 发布时间：{{p.c_time|date:"Y-m-d"}}</span>
+          </div>
+          <h4><a href="{% url 'UserApp:blog_details' %}?pid={{p.post_id}}">{{p.post_title}}</a></h4>
+          <p>{{p.post_content}}</p>
+          <div>
+            <!-- 点赞按钮 -->
+            {% if user in p.users_like.all %}
+            <i type="button" onclick="ck_like(event,'{{ p.post_id }}')" id="{{ p.post_id }}" class="bi bi-heart-fill"
+              style="color: red;">{{p.users_like.count}}</i>
+
+            {% else %}
+            <i type="button" class="bi bi-heart" onclick="ck_like(event,'{{p.post_id }}')"
+              id="{{ p.post_id }}">{{p.users_like.count}}</i>
+            {% endif %}
+            <!-- 评论按钮 -->
+            <i type="button" class="bi bi-chat-square-dots" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="$('#comment_pid').val('{{p.post_id}}')"></i>
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">评论帖子</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- contact开始 -->
+                    <div class="col-xl-12">
+                      <div class="card p-4">
+        
+                        <form action="{% url 'UserApp:comment'%}" method="post">
+                          <span class="loading error-message sent-message"></span>
+                          {% csrf_token %}
+                          <div class="row gy-4">
+                            <input type="hidden"  name="pid" id="comment_pid">
+                            <div class="col-md-12">
+                              <textarea class="form-control" name="content" rows="6" placeholder="内容" required=""></textarea>
+                            </div>
+        
+                            <!-- contact结束 -->
+        
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary">发布</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 发帖结束 -->
+                </div>
+              </div>
+            </div>
+
+            {% if p.u_id.uid == request.session.uid %}
+            <i type="button" class="bi bi-trash" onclick="ck_trash(event,'{{p.post_id }}')"></i>
+            {% endif %}
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    暂时没有帖子
+    {% endfor %}
+  </div>
+  <script>
+    function ck_trash(event, id) {
+      var csrfToken = $("[name='csrfmiddlewaretoken']").val();
+      var url = '{% url "UserApp:blog" %}';
+      var data = {
+        "csrfmiddlewaretoken": csrfToken,
+        'pid': id,
+        "type": "delete",
+      }
+      $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        success: function (res) {
+          if (res.state == 200) {
+            window.location.reload(); //刷新当前页面
+          }
+          else {
+            alert(res.info)
+          }
+
+        },
+        error: function (res) {
+          alert(res.info)
+        }
+      })
+    }
+
+    function ck_like(event, id) {
+      let like_btn = event.target;
+      var csrfToken = $("[name='csrfmiddlewaretoken']").val();
+      var url = '{% url "UserApp:like_post" %}';
+      var data = {
+        "csrfmiddlewaretoken": csrfToken,
+        'pid': id,
+      }
+      $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        success: function (res) {
+          if (res.state == 200) {
+            // console.log(like_btn)
+            like_btn.innerText = res.like_sum
+            if (res.type) {
+              like_btn.className = 'bi bi-heart-fill'
+              like_btn.style.color = "red"
+            } else {
+              like_btn.className = 'bi bi-heart'
+              like_btn.style = ""
+            }
+          } else {
+            alert(res.data)
+          }
+        },
+        error: function (res) {
+          alert(res.data)
+        }
+      })
+    }
+  </script>
+
+
+</section>
+
+
+
+{% endblock %}

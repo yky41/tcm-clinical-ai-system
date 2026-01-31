@@ -1,0 +1,80 @@
+{% extends "info_manage.html" %}
+{% block title %}
+编辑体检信息
+{% endblock %}
+
+{% block subtitle %}
+编辑体检信息
+{% endblock %}
+
+{% block main %}
+编辑体检信息
+{% endblock %}
+
+{% block content %}
+<section class="section profile">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">编辑体检信息</h5>
+          <form action="{% url 'adminApp:ehi1' pEinfo.PEid %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <label for="user_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_name" type="text" class="form-control" id="user_name" value="{{ pEinfo.user_name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="user_sex" class="col-md-4 col-lg-3 col-form-label">性别</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="user_sex" type="text" class="form-control" id="user_sex" value="{{ pEinfo.user_sex }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="blood_sugar" class="col-md-4 col-lg-3 col-form-label">血糖</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="blood_sugar" type="text" class="form-control" id="blood_sugar" value="{{ pEinfo.blood_sugar }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="total_cholesterol" class="col-md-4 col-lg-3 col-form-label">总胆固醇</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="total_cholesterol" type="text" class="form-control" id="total_cholesterol" value="{{ pEinfo.total_cholesterol }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="triglyceride" class="col-md-4 col-lg-3 col-form-label">甘油三酯</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="triglyceride" type="text" class="form-control" id="triglyceride" value="{{ pEinfo.triglyceride }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="minimum" class="col-md-4 col-lg-3 col-form-label">低压</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="minimum" type="text" class="form-control" id="minimum" value="{{ pEinfo.minimum }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="maximum" class="col-md-4 col-lg-3 col-form-label">高压</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="maximum" type="text" class="form-control" id="maximum" value="{{ pEinfo.maximum }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="heart_rate" class="col-md-4 col-lg-3 col-form-label">心率</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="heart_rate" type="text" class="form-control" id="heart_rate" value="{{ pEinfo.heart_rate }}">
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">保存修改</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

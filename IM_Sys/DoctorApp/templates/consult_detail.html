@@ -1,0 +1,113 @@
+
+{% extends "doctor_base.html" %}
+{% block title %}
+处方详情
+{% endblock %}
+
+{% block header %}
+<style>
+  .underline{
+    
+    text-align: center;
+    min-width: 100px;
+    display: inline-block;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+</style>
+{% endblock %}
+
+
+{% block subtitle %}
+处方详情
+{% endblock %}
+
+
+{% block main %}处方详情{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Default Table -->
+      <div class="card">
+        <div class="card-body">
+
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span6">
+                <div class="row clearfix">
+                  <div class="col-md-3 column" >
+                  </div>
+                  <div class="col-md-6 column" style="background-color:#f6f9ff;">
+                    <div class="span3">
+                    </div>
+                    <br> <br>
+
+                    <h3 class="text-center">
+
+                      <span class="badge bg-info">电子处方笺</span>
+                    </h3>
+                    <br> <br>
+
+
+                    <div class="text-center">
+                      
+
+                      <span>处方号: <span class="underline">{{c.r_id.recipe_id}}</span></span>
+                      <span>科室: <span class="underline">{{c.d_id.deid.d_name}}</span></span>
+                      <span>日期:<span class="underline">{{c.r_id.date|date:"Y-m-d"}}</span></span>
+                      <br> <br>
+                      <span>姓名:<span class="underline">{{c.u_id.user_name}}</span></span>
+                      <span>性别:<span class="underline">{{c.u_id.user_sex}}</span></span>
+                      <span>年龄:<span class="underline">{{c.u_id.user_age}}</span></span>
+                      <br> <br>
+                      <span>初步诊断:<span class="underline" style="min-width: 400px;">{{c.r_id.diagnose}}</span></span>
+                    </div>
+                    <br> <br>
+                    <div class="row clearfix" style="padding-top: 20px;">
+                      <div class="col-md-12 column">
+                        <div class="row clearfix">
+                          <div class="col-md-2 column">
+                            <span style="font-size: xx-large;font-weight: bolder">Rp.</span>
+                            <!-- <img src="../../static/img/Rp.jpg" style="width: 70px;height: 50px""> -->
+
+                          </div>
+                          <div class=" col-md-10 column">
+                            <div class="text-center" style="min-height: 400px;">
+                              {{c.r_id.Rp|safe}}
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-3 column">
+                  </div>
+                </div>
+
+              </div>
+              <div class="span3">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Default Tabs -->
+
+
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

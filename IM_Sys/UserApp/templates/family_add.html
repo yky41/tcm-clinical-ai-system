@@ -1,0 +1,249 @@
+{% extends "user_base.html" %}
+{% block title %}
+家人档案信息添加
+{% endblock %}
+
+{% block subtitle %}
+家人档案信息添加
+{% endblock %}
+
+
+{% block main %}家人健康档案{% endblock %}
+
+{% block content %}
+<section>
+
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">家人档案信息添加</h5>
+
+      <!-- Default Tabs -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+            role="tab" aria-controls="home" aria-selected="true">基本信息</button>
+        </li>
+        <!-- <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+            role="tab" aria-controls="profile" aria-selected="false">体检信息</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+            role="tab" aria-controls="contact" aria-selected="false">诊疗信息</button>
+        </li> -->
+      </ul>
+
+
+      <div class="tab-content pt-2" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <!-- Vertical Form -->
+          <form class="row g-3" action="{% url 'UserApp:family_add'%}" method="post">
+            {% csrf_token %}
+
+
+            <div class="col-md-12">
+              <label for="relationship" class="form-label">与本人关系</label>
+              <input type="text" class="form-control" id="relationship" name="relationship">
+            </div>
+
+            <div class="col-md-12">
+              <label for="relative_name" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="relative_name" name="relative_name">
+            </div>
+
+            <div class="col-md-12">
+              <label for="relative_sex" class="form-label">性别</label>
+              <select id="relative_sex" class="form-select" name="relative_sex">
+                <option selected>男</option>
+                <option>女</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <label for="relative_age" class="form-label">年龄</label>
+              <input type="text" class="form-control" id="relative_age" name="relative_age">
+            </div>
+
+            <div class="col-md-12">
+              <label for="relative_height" class="form-label">身高(cm)</label>
+              <input type="text" class="form-control" id="relative_height" name="relative_height" placeholder="如165">
+            </div>
+            <div class="col-md-12">
+              <label for="relative_weight" class="form-label">体重(kg)</label>
+              <input type="text" class="form-control" id="relative_weight" name="relative_weight" placeholder="如55">
+            </div>
+
+            <div class="col-12">
+              <label for="relative_allergy" class="form-label">药物过敏史</label>
+              <input type="text" class="form-control" id="relative_allergy" name="relative_allergy" placeholder="如青霉素、磺胺、链霉素等">
+            </div>
+
+            <div class="col-md-12">
+              <label for="relative_illness" class="form-label">疾病史</label>
+              <input type="text" class="form-control" id="relative_illness" name="relative_illness" placeholder="如高血压、糖尿病、冠心病、慢性阻塞性肺疾病等">
+            </div>
+            <div class="col-md-12">
+              <label for="disability" class="form-label">残疾</label>
+              <input type="text" class="form-control" id="disability" name="disability" placeholder="如视力残疾、听力残疾、言语残疾、肢体残疾等">
+            </div>
+            <div>
+              <label for="relative_surgery" class="form-label">手术情况</label>
+              <input type="text" class="form-control" id="relative_surgery" name="relative_surgery" placeholder="如有请输入手术名称，没有输入无">
+
+              
+            </div>
+            <div>
+              <label for="relative_injury" class="form-label">外伤情况</label>
+              <input type="text" class="form-control" id="relative_injury" name="relative_injury" placeholder="没有输入无">
+
+              
+            </div>
+            
+
+            <div class="col-md-12">
+              <label for="common_drugs" class="form-label">常用药</label>
+              <input type="text" class="form-control" id="common_drugs" name="common_drugs" placeholder="有请输入名称，没有输入无">
+            </div>
+
+
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+
+
+        <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          
+          <form class="row g-3">
+            <div class="col-md-12">
+              <label for="rid" class="form-label">选择家庭成员</label>
+              <select id="rid" class="form-select" name="rid">
+                {% for i in res %}
+                <option value=""></option>
+                {% empty %}
+                <option value="">暂无请先添加基本信息</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+
+            
+
+            <div class="col-md-12">
+              <label for="items" class="form-label">检查项目</label>
+              <input type="text" class="form-control" id="items" name="items">
+            </div>
+
+
+            <div class="col-md-12">
+              <label for="blood_sugar" class="form-label">血糖</label>
+              <input type="text" class="form-control" id="blood_sugar" name="blood_sugar" placeholder="空腹:3.9-6.1mmol/L(正常)">
+            </div>
+            <div class="col-md-12">
+              <label for="total_cholesterol" class="form-label">总胆固醇</label>
+              <input type="text" class="form-control" id="total_cholesterol" name="total_cholesterol" placeholder="2.8-5.17mmol/L(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="triglyceride" class="form-label">甘油三酯</label>
+              
+              <input type="text" class="form-control" id="triglyceride" name="triglyceride" placeholder="0.56-1.7mmol/L(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="minimum" class="form-label">低压</label>
+              <input type="text" class="form-control" id="minimum" name="minimum" placeholder="60-89mmHg(正常)">
+            </div>
+            <div class="col-md-12">
+              <label for="maximum" class="form-label">高压</label>
+              <input type="text" class="form-control" id="maximum" name="maximum" placeholder="90-139mmHg(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="heart_rate" class="form-label">心率</label>
+              <input type="text" class="form-control" id="heart_rate" name="heart_rate" placeholder="60-100次/分钟(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="date" class="form-label">检查日期</label>
+              <input type="date" class="form-control" id="date" name="date">
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form>
+        </div> -->
+
+        <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          
+          <form class="row g-3">
+            <div class="col-md-12">
+              <label for="rid" class="form-label">选择家庭成员</label>
+              <select id="rid" class="form-select" name="rid">
+                {% for i in res %}
+                <option value=""></option>
+                {% empty %}
+                <option value="">暂无请先添加基本信息</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <label for="department" class="form-label">就诊科室</label>
+              <input type="text" class="form-control" id="department" name="department">
+            </div>
+
+            <div class="col-md-12">
+              <label for="chief_complaint" class="form-label">主诉</label>
+              <input type="text" class="form-control" id="chief_complaint" name="chief_complaint" placeholder="自己的症状或（和）体征、性质，以及持续时间等内容（精简）">
+            </div>
+
+            <div class="col-md-12">
+              <label for="HPI" class="form-label">现病史</label>
+              <input type="text" class="form-control" id="HPI" name="HPI" placeholder="患者病后的全过程，即发生、发展、演变和诊治经过(详细)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="PH" class="form-label">既往史</label>
+              <input type="text" class="form-control" id="PH" name="PH" placeholder="患者既往的健康状况和过去曾经患过的疾病与这次问诊相关等方面的问题">
+            </div>
+
+            <div class="col-md-12">
+              <label for="diagnose" class="form-label">诊断</label>
+              <input type="text" class="form-control" id="diagnose" name="diagnose" placeholder="医生的临床诊断结果">
+            </div>
+
+            <div class="col-md-12">
+              <label for="prescription" class="form-label">处方药</label>
+              <input type="text" class="form-control" id="prescription" name="prescription">
+            </div>
+
+            <div class="col-md-12">
+              <label for="DA" class="form-label">医嘱</label>
+              <input type="text" class="form-control" id="DA" name="DA">
+            </div>
+
+            <div class="col-md-12">
+              <label for="date" class="form-label">就诊日期</label>
+              <input type="date" class="form-control" id="date" name="date">
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form>
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

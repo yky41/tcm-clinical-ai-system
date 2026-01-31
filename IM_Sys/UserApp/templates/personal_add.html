@@ -1,0 +1,276 @@
+{% extends "user_base.html" %}
+{% block title %}
+健康档案添加
+{% endblock %}
+
+{% block subtitle %}
+健康档案添加
+{% endblock %}
+
+
+{% block main %}个人健康档案{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">档案信息添加</h5>
+
+    <!-- Default Tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true">基本信息</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false">体检信息</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+          role="tab" aria-controls="contact" aria-selected="false">诊疗信息</button>
+      </li>
+    </ul>
+
+    <!-- 个人基本信息 -->
+    <div class="tab-content pt-2" id="myTabContent" >
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" action="{% url 'UserApp:personal_add'%}">
+          {% csrf_token %}
+          <div class="col-md-12">
+            <label for="user_name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="user_name" name="user_name"  value="{{user.user_name}}">
+          </div>
+          <input type="hidden" value="info" name="type">
+
+          <div class="col-md-12">
+            <label for="user_age" class="form-label">年龄</label>
+            <input type="text" class="form-control" id="user_age" name="user_age"  value="{{user.user_age}}">
+          </div>
+
+          <div class="col-md-12">
+            <label for="inputState" class="form-label">性别</label>
+            <select id="user_sex" class="form-select" name="user_sex"  >
+              {% if user.user_sex  == '男' %}
+              <option selected>男</option>
+              <option>女</option>
+              {% else %}
+              <option >男</option>
+              <option selected>女</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="col-md-12">
+            <label for="user_height" class="form-label">身高(cm)</label>
+            <input type="text" class="form-control" id="user_height" placeholder="如165" name="user_height">
+          </div>
+          <div class="col-md-12">
+            <label for="user_weight" class="form-label">体重(kg)</label>
+            <input type="text" class="form-control" id="user_weight" placeholder="如55" name="user_weight">
+          </div>
+
+          <div class="col-12">
+            <label for="allergy" class="form-label">药物过敏史</label>
+            <!-- <input type="text"  id="modelCode" class="typeahead form-control" data-provide="typeahead"> -->
+            <input type="text" class="form-control" id="allergy" placeholder="如青霉素、磺胺、链霉素等" name="allergy">
+          </div>
+
+          <div class="col-md-12">
+            <label for="illness" class="form-label">疾病史</label>
+            <input type="text" class="form-control" id="illness" placeholder="如高血压、糖尿病、冠心病、慢性阻塞性肺疾病等" name="illness">
+          </div>
+          <div class="col-md-12">
+            <label for="disability" class="form-label">残疾</label>
+            <input type="text" class="form-control" id="disability" placeholder="如视力残疾、听力残疾、言语残疾、肢体残疾等" name="disability">
+          </div>
+
+          <div class="col-md-12">
+            <label for="common_drugs" class="form-label">常用药</label>
+            <input type="text" class="form-control" id="common_drugs" name="common_drugs" placeholder="有请输入手术名称，没有输入无">
+          </div>
+
+
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+          </div>
+        </form><!-- Vertical Form -->
+      </div>
+
+      <!-- 体检 -->
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" action="{% url 'UserApp:personal_add'%}" >
+          {% csrf_token %}
+          <div class="col-md-12">
+            <label for="user_name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="user_name" name="user_name"  value="{{user.user_name}}" disabled>
+          </div>
+          
+
+          <div class="col-md-12">
+            <label for="user_age" class="form-label">年龄</label>
+            <input type="text" class="form-control" id="user_age" name="user_age"  value="{{user.user_age}}" disabled>
+          </div>
+
+          <div class="col-md-12">
+            <label for="inputState" class="form-label">性别</label>
+            <select id="user_sex" class="form-select" name="user_sex"  value="{{user.user_sex}}" disabled>
+              {% if user.user_sex  == '男' %}
+              <option selected>男</option>
+              <option>女</option>
+              {% else %}
+              <option >男</option>
+              <option selected>女</option>
+              {% endif %}
+            </select>
+          </div>
+          <input type="hidden" name="type" value="PE">
+
+          <div class="col-md-12">
+            <label for="hospital" class="form-label">检查医院</label>
+            <input type="text" class="form-control" id="hospital" name="hospital">
+          </div>
+
+          <!-- <div class="col-md-12">
+            <label for="items" class="form-label">检查项目</label>
+            <input type="text" class="form-control" id="items" name="items">
+          </div> -->
+
+
+          <div class="col-md-12">
+            <label for="blood_sugar" class="form-label">血糖</label>
+            <input type="text" class="form-control" id="blood_sugar" name="blood_sugar" placeholder="空腹:3.9-6.1mmol/L(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="total_cholesterol" class="form-label">总胆固醇</label>
+            <input type="text" class="form-control" id="total_cholesterol" name="total_cholesterol" placeholder="2.8-5.17mmol/L(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="triglyceride" class="form-label">甘油三酯</label>
+            <!-- <input type="text"  id="modelCode" class="typeahead form-control" data-provide="typeahead"> -->
+            <input type="text" class="form-control" id="triglyceride" name="triglyceride" placeholder="0.56-1.7mmol/L(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="minimum" class="form-label">低压</label>
+            <input type="text" class="form-control" id="minimum" name="minimum" placeholder="60-89mmHg(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="maximum" class="form-label">高压</label>
+            <input type="text" class="form-control" id="maximum" name="maximum" placeholder="90-139mmHg(正常)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="heart_rate" class="form-label">心率</label>
+            <input type="text" class="form-control" id="heart_rate" name="heart_rate" placeholder="60-100次/分钟(正常)">
+          </div>
+          <div class="col-md-12">
+            <label for="date" class="form-label">体检日期</label>
+            <input type="date" class="form-control" id="date" name="date">
+          </div>
+
+
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+          </div>
+        </form><!-- Vertical Form -->
+      </div>
+
+
+      <!-- 诊疗 -->
+
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" action="{% url 'UserApp:personal_add'%}" >
+          {% csrf_token %}
+          <div class="col-md-12">
+            <label for="user_name" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="user_name" name="user_name"  value="{{user.user_name}}" disabled>
+          </div>
+          <input type="hidden" value="visit" name="type">
+
+          <div class="col-md-12">
+            <label for="user_age" class="form-label">年龄</label>
+            <input type="text" class="form-control" id="user_age" name="user_age"  value="{{user.user_age}}" disabled>
+          </div>
+
+          <div class="col-md-12">
+            <label for="inputState" class="form-label">性别</label>
+            <select id="user_sex" class="form-select" name="user_sex"  value="{{user.user_sex}}" disabled>
+              {% if user.user_sex  == '男' %}
+              <option selected>男</option>
+              <option>女</option>
+              {% else %}
+              <option >男</option>
+              <option selected>女</option>
+              {% endif %}
+            </select>
+          </div>
+
+            <div class="col-md-12">
+    <label for="department" class="form-label">就诊科室</label>
+    <select class="form-select" id="department" name="department">
+        <option value="">请选择科室</option>
+        {% for department in departments %}
+            <option value="{{ department.d_name }}">{{ department.d_name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+
+          <div class="col-md-12">
+            <label for="chief_complaint" class="form-label">主诉</label>
+            <input type="text" class="form-control" id="chief_complaint" name="chief_complaint" placeholder="自己的症状或（和）体征、性质，以及持续时间等内容（精简）">
+          </div>
+
+          <div class="col-md-12">
+            <label for="HPI" class="form-label">现病史</label>
+            <input type="text" class="form-control" id="HPI" name="HPI" placeholder="患者病后的全过程，即发生、发展、演变和诊治经过(详细)">
+          </div>
+
+          <div class="col-md-12">
+            <label for="PH" class="form-label">既往史</label>
+            <input type="text" class="form-control" id="PH" name="PH" placeholder="患者既往的健康状况和过去曾经患过的疾病与这次问诊相关等方面的问题">
+          </div>
+
+          <div class="col-md-12">
+            <label for="diagnose" class="form-label">诊断</label>
+            <input type="text" class="form-control" id="diagnose" name="diagnose" placeholder="医生的临床诊断结果">
+          </div>
+
+          <div class="col-md-12">
+            <label for="prescription" class="form-label">处方药</label>
+            <input type="text" class="form-control" id="prescription" name="prescription">
+          </div>
+
+          <div class="col-md-12">
+            <label for="DA" class="form-label">医嘱</label>
+            <input type="text" class="form-control" id="DA" name="DA">
+          </div>
+
+          <div class="col-md-12">
+            <label for="date" class="form-label">就诊日期</label>
+            <input type="date" class="form-control" id="date" name="date">
+          </div>
+
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+          </div>
+        </form><!-- Vertical Form -->
+      </div>
+    </div><!-- End Default Tabs -->
+
+  </div>
+</div>
+
+
+{% endblock %}

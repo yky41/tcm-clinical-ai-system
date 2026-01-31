@@ -1,0 +1,131 @@
+{% extends "user_base.html" %}
+{% block title %}
+用户首页
+{% endblock %}
+
+{% block subtitle %}
+个人基本信息
+{% endblock %}
+{% block content %}
+
+
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title"></h6>
+
+
+    <!-- Vertical Form -->
+    <form class="row g-3">
+      <div class="col-md-4">
+        <label for="inputNanme4" class="form-label">姓名</label>
+        <input type="text" class="form-control" id="inputNanme4">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">年龄</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">性别</label>
+        <select id="inputState" class="form-select">
+          <option selected>男</option>
+          <option>女</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">身高(cm)</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="如165">
+      </div>
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">体重(kg)</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="如55">
+      </div>
+
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">药物过敏史</label>
+        <!-- <input type="text"  id="modelCode" class="typeahead form-control" data-provide="typeahead"> -->
+        <input type="text" class="form-control" id="inputAddress" placeholder="如青霉素、磺胺、链霉素等">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">外伤</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="有请输入外伤名称，没有输入无">
+      </div>
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">外伤时间</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">手术</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="有请输入手术名称，没有输入无">
+      </div>
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">手术时间</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">家族史</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">遗传病史</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">是否残疾</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">常用药</label>
+        <input type="text" class="form-control" id="inputAddress">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">添加</button>
+        <button type="reset" class="btn btn-secondary">重置</button>
+      </div>
+    </form><!-- Vertical Form -->
+
+
+
+  </div>
+</div>
+
+
+
+
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Example Card</h5>
+          <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Example Card</h5>
+          <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

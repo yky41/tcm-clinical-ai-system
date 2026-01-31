@@ -1,0 +1,209 @@
+
+{% extends "user_base.html" %}
+{% block title %}
+线上咨询
+{% endblock %}
+
+{% block subtitle %}
+线上咨询 
+{% endblock %}
+
+
+{% block main %}线上咨询{% endblock %}
+
+{% block content %}
+
+<section>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">线上咨询</h5>
+
+
+      <div class="tab-content pt-2" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel"
+          aria-labelledby="home-tab">
+          <!-- Vertical Form -->
+          <form class="row g-3" action="{% url 'UserApp:online_consult'%}" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{doctor.uid}}" name="did"  >
+            <div class="col-md-12">
+              <label for="target" class="form-label">请问您本次就诊的原因（或目的）是什么</label>
+              <input type="text" class="form-control" id="target" name="target">
+            </div>
+
+            <div class="col-md-12">
+              <label for="howlong" class="form-label">请问您这个症状持续多久了</label>
+              <input type="text" class="form-control" id="howlong" name="howlong">
+            </div>
+            <div class="col-md-12">
+              <label for="drugs" class="form-label">请问您针对以上症状，是否应用了药物进行治疗</label>
+              <input type="text" class="form-control" id="drugs" placeholder="如有请填写具体药物名称" name="drugs">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+
+
+        <div class="tab-pane fade" id="profile" role="tabpanel"
+          aria-labelledby="profile-tab">
+          <!-- Vertical Form -->
+          <form class="row g-3">
+            <div class="col-md-12">
+              <label for="inputNanme4" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="inputNanme4">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputPassword4" class="form-label">年龄</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputState" class="form-label">性别</label>
+              <select id="inputState" class="form-select">
+                <option selected>男</option>
+                <option>女</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputPassword4" class="form-label">检查项目</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">血糖</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="空腹:3.9-6.1mmol/L(正常)">
+            </div>
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">总胆固醇</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="2.8-5.17mmol/L(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">甘油三酯</label>
+              <!-- <input type="text"  id="modelCode" class="typeahead form-control" data-provide="typeahead"> -->
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="0.56-1.7mmol/L(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">低压</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="60-89mmHg(正常)">
+            </div>
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">高压</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="90-139mmHg(正常)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">心率</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="60-100次/分钟(正常)">
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+
+
+
+
+        <div class="tab-pane fade" id="contact" role="tabpanel"
+          aria-labelledby="contact-tab">
+          <!-- Vertical Form -->
+          <form class="row g-3">
+            <div class="col-md-12">
+              <label for="inputNanme4" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="inputNanme4">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputPassword4" class="form-label">年龄</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputState" class="form-label">性别</label>
+              <select id="inputState" class="form-select">
+                <option selected>男</option>
+                <option>女</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">就诊科室</label>
+              <input type="text" class="form-control" id="inputAddress">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">主诉</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="自己的症状或（和）体征、性质，以及持续时间等内容（精简）">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">现病史</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="患者病后的全过程，即发生、发展、演变和诊治经过(详细)">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">既往史</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="患者既往的健康状况和过去曾经患过的疾病与这次问诊相关等方面的问题">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">诊断</label>
+              <input type="text" class="form-control" id="inputAddress"
+                placeholder="医生的临床诊断结果">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">处方药</label>
+              <input type="text" class="form-control" id="inputAddress">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">医嘱</label>
+              <input type="text" class="form-control" id="inputAddress">
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputAddress" class="form-label">就诊日期</label>
+              <input type="text" class="form-control" id="inputAddress">
+            </div>
+
+
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-secondary">重置</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div><!-- End Default Tabs -->
+
+    </div>
+  </div>
+
+
+
+
+</section>
+
+
+
+{% endblock %}

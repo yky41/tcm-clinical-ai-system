@@ -1,0 +1,119 @@
+{% extends "admin_base.html" %}
+{% block title %}
+科室管理
+{% endblock %}
+
+{% block subtitle %}
+科室管理
+{% endblock %}
+
+{% block main %}
+科室管理
+{% endblock %}
+
+{% block content %}
+<section class="section profile">
+  <div class="row">
+    <section class="section">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title"></div>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>科室编号</th>
+                    <th>科室</th>
+                    <th>科室介绍</th>
+                    <th>医生</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for department in departments %}
+                  <tr>
+                    <td>{{ department.id }}</td>
+                    <td>{{ department.d_name }}</td>
+                    <td>{{ department.introduce }}</td>
+                    <td>
+                      <ul>
+                        {% for doctor in department.doctors %}
+                        <li>{{ doctor.doctor_name }}</li>
+                        {% endfor %}
+                      </ul>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">增加科室</button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal">删除科室</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 增加科室 Modal -->
+  <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDepartmentModalLabel">增加科室</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addDepartmentForm" method="post" action="{% url 'adminApp:add_department' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="d_name" class="form-label">科室名</label>
+              <input type="text" class="form-control" id="d_name" name="d_name" required>
+            </div>
+            <div class="mb-3">
+              <label for="introduce" class="form-label">科室介绍</label>
+              <input type="text" class="form-control" id="introduce" name="introduce" required>
+            </div>
+            <button type="submit" class="btn btn-primary">提交</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 删除科室 Modal -->
+  <div class="modal fade" id="deleteDepartmentModal" tabindex="-1" aria-labelledby="deleteDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteDepartmentModalLabel">删除科室</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="deleteDepartmentForm" method="post" action="{% url 'adminApp:delete_department' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="department_id" class="form-label">选择科室</label>
+              <select class="form-control" id="department_id" name="department_id">
+                {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.d_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-danger">删除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock %}

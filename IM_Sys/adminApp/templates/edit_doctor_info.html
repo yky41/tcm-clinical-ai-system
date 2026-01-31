@@ -1,0 +1,111 @@
+{% extends "patient_manage.html" %}
+{% block title %}
+编辑医生信息
+{% endblock %}
+
+{% block subtitle %}
+编辑医生信息
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <form action="{% url 'adminApp:edit_doctor_info' %}?uid={{ doctor.uid }}" method="post">
+            {% csrf_token %}
+
+            <div class="row mb-3">
+              <label for="doctor_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="doctor_name" type="text" class="form-control" id="doctor_name" value="{{ doctor.doctor_name }}">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="doctor_sex" class="col-md-4 col-lg-3 col-form-label">性别</label>
+              <div class="col-md-8 col-lg-9">
+                <select id="doctor_sex" class="form-select" name="doctor_sex">
+                  {% if doctor.doctor_sex == '男' %}
+                  <option selected>男</option>
+                  <option>女</option>
+                  {% else %}
+                  <option>男</option>
+                  <option selected>女</option>
+                  {% endif %}
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="doctor_age" class="col-md-4 col-lg-3 col-form-label">年龄</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="doctor_age" type="text" class="form-control" id="doctor_age" value="{{ doctor.doctor_age }}">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="email" class="col-md-4 col-lg-3 col-form-label">邮箱</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="email" type="text" class="form-control" id="email" value="{{ doctor.email }}">
+              </div>
+            </div>
+
+            <!-- 添加新字段的输入框 -->
+            <div class="row mb-3">
+              <label for="new_field" class="col-md-4 col-lg-3 col-form-label">新字段名称</label>
+              <div class="col-md-8 col-lg-9">
+                <input name="new_field" type="text" class="form-control" id="new_field" value="{{ doctor.new_field }}">
+              </div>
+            </div>
+
+          <div class="row mb-3">
+                  <label for="deid" class="col-md-4 col-lg-3 col-form-label">所属科室</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select class="form-select" aria-label="Default select example" id="deid" name="deid">
+                      <!-- <option selected=""></option> -->
+                      {% for d in departments %}
+                      {% if d.id == doctor.deid %}
+                      <option value={{d.id}} selected>{{d.d_name}}</option>
+                      {% else %}
+                      <option value={{d.id}}>{{d.d_name}}</option>
+                      {% endif %}
+
+                      {% endfor %}
+                    </select>
+
+                  </div>
+                </div>
+
+          <div class="row mb-3">
+                  <label for="hospital" class="col-md-4 col-lg-3 col-form-label">所属医院</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="hospital" type="text" class="form-control" id="hospital" value="{{doctor.hospital}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="good_at" class="col-md-4 col-lg-3 col-form-label">擅长领域</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="good_at" type="text" class="form-control" id="good_at" value="{{doctor.good_at}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="title" class="col-md-4 col-lg-3 col-form-label">职称</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="title" type="text" class="form-control" id="title" value="{{doctor.title}}">
+                  </div>
+                </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

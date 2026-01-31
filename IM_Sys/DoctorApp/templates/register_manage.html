@@ -1,0 +1,93 @@
+
+{% extends "doctor_base.html" %}
+{% block title %}
+预约管理
+{% endblock %}
+{% block subtitle %}
+预约管理
+{% endblock %}
+
+
+{% block main %}预约管理{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+<!--表格健康档案-->
+<section class="section profile">
+  <div class="row">
+
+    <section class="section">
+      <div class="row">
+        <div class="col-xl-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">预约记录</h5>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>挂号编号</th>
+                      <th>姓名</th>
+                      <th>性别</th>
+                      <th>年龄</th>
+                      <th>电话号</th>
+                      <th>挂号类型</th>
+                      <th>挂号日期</th>
+                      <th>时间段</th>
+                      <th>状态</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in registers %}
+                    <tr>
+
+                      <td>{{forloop.counter}}</td>
+                      <td>{{i.u_id.user_name}}</td>
+                      <td>{{i.u_id.user_sex}}</td>
+                      <td>{{i.u_id.user_age}}</td>
+                      <td>{{i.u_id.phone}}</td>
+                      <td>{{i.r_type}}</td>
+
+                      <td>{{i.date}}</td>
+                      <td>{{i.s_time}}--{{i.end_time}}</td>
+
+                      <!--                        <td>2</td>-->
+                      <td>
+                        <div class="btn-group">
+                          {% if i.status == '0' %}
+                          <a type="button" href="/doctor/register/?rid={{i.r_id}}&status=1" class="btn btn-danger btn-sm"><i
+                              class="bi bi-exclamation-octagon"></i>未完成</a>
+
+                          {% endif %}
+                          {% if i.status == '1' %}
+
+                          <a type="button" href="/doctor/register/?rid={{i.r_id}}&status=0" class="btn btn-success btn-sm"><i
+                              class="bi bi-check-circle"></i>已完成</a>
+
+                          {% endif %}
+
+
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</section>
+
+{% endblock %}

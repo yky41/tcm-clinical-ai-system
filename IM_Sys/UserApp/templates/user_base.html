@@ -1,0 +1,443 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title style="font-size: 14px;">中医临床智能辅助诊疗系统|{% block title %} {% endblock %}</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/static/img/favicon.png" rel="icon">
+    <link href="/static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/static/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/static/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/static/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/static/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/static/css/style.css" rel="stylesheet">
+
+    <script src="/static/js/jquery.js"></script>
+    <!-- jquery -->
+    {% block header %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="{% url 'UserApp:home' %}" class="logo d-flex align-items-center">
+                <img src="/static/img/logo.png" alt="">
+                <span class="d-none d-lg-block" style="font-size: 14px;">中医临床智能辅助诊疗系统</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <!-- <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div> -->
+        <!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <!-- <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li> -->
+                <!-- End Search Icon-->
+
+                <!-- <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>Lorem Ipsum</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>30 min. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>Atque rerum nesciunt</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>1 hr. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Sit rerum fuga</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>2 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>Dicta reprehenderit</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+
+                    </ul>
+
+                </li> -->
+                <!-- End Notification Nav -->
+
+                <!-- <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have 3 new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="/static/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Maria Hudson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>4 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="/static/img/messages-2.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Anna Nelson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>6 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="/static/img/messages-3.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>David Muldon</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>8 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">Show all messages</a>
+                        </li>
+
+                    </ul>
+
+                </li> -->
+                <!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <!-- <img src="/static/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{request.session.username}}</span>
+                        <!-- 显示在线用户 -->
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>{{request.session.username}}</h6>
+                            <span>{{request.session.uid}}</span>
+                            <!-- 角色 -->
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'UserApp:personal_manage' %}">
+                                <i class="bi bi-person"></i>
+                                <span>个人健康档案</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>退出登录</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed " href="{% url 'UserApp:home' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>个人健康档案</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'UserApp:personal_add' %}" id="personal_add">
+                            <i class="bi bi-circle"></i><span>健康档案添加</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'UserApp:personal_manage' %}" id="personal_manage">
+                            <i class="bi bi-circle"></i><span>档案记录管理</span>
+                        </a>
+                    </li>
+
+
+
+                </ul>
+            </li><!-- End 个人健康档案 Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>家庭健康档案</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'UserApp:family_add' %}" id="family_add">
+                            <i class="bi bi-circle"></i><span>健康档案添加</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'UserApp:family_manage' %}" id="family_manage">
+                            <i class="bi bi-circle"></i><span>档案记录管理</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>预约诊疗</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'UserApp:register_online' %}" id="register_online">
+                            <i class="bi bi-circle"></i><span>线上挂号</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'UserApp:user_register' %}" id='user_register'>
+                            <i class="bi bi-circle"></i><span>我的预约</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav -->
+
+
+            <li class="nav-item">
+
+                <a class="nav-link collapsed" data-bs-target="#tables-online" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>线上咨询</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-online" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{% url 'UserApp:online_consult' %}" id="online_consult">
+                            <i class="bi bi-circle"></i><span>在线问诊</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'UserApp:my_online_consult' %}" id="my_online_consult">
+                            <i class="bi bi-circle"></i><span>我的处方</span>
+                        </a>
+                    </li>
+                </ul>
+
+                
+            </li><!-- End Contact Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'UserApp:blog'%}">
+                    <i class="bi bi-envelope"></i>
+                    <span>论坛</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>健康新闻</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+
+                        <a href="{% url 'UserApp:news' %}" id="news">
+                            <i class="bi bi-circle"></i><span>健康新闻</span>
+                        </a>
+                    </li>
+                    
+                    <!--          -->
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{% url 'UserApp:answer' %}" id="answer">
+                    <i class="bi bi-envelope"></i>
+                    <span>智能诊断</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+            <!-- End Icons Nav -->
+
+
+        </ul>
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <main id="main" class="main">
+        {% csrf_token %}
+        <div class="pagetitle">
+            <h1>{% block main %}{% endblock %}</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'UserApp:home' %}">首页</a></li>
+                    <li class="breadcrumb-item">{% block subtitle %}{% endblock %}</li>
+                </ol>
+            </nav>
+        </div>
+        {% block content %}
+
+        {% endblock %}
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <!-- <footer id="footer" class="footer"> -->
+        <!-- <div class="copyright">
+      Copyright &copy; 2022.Company name All rights reserved.<a target="_blank" href="https://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+    </div> -->
+
+        
+    <!-- </footer>End Footer -->
+
+    
+
+    <!-- Vendor JS Files -->
+    <script src="/static/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/chart.js/chart.min.js"></script>
+    <script src="/static/vendor/echarts/echarts.min.js"></script>
+    <script src="/static/vendor/quill/quill.min.js"></script>
+    <script src="/static/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/static/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/static/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/static/js/main.js"></script>
+
+    <script>
+        $("#{{active_menu}}").addClass("active")
+        $("#{{active_menu}}").parent().parent("ul").addClass("show")
+    </script>
+
+</body>
+
+</html>

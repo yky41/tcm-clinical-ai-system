@@ -1,0 +1,44 @@
+
+
+
+
+
+
+{% extends "user_base.html" %}
+{% block title %}
+健康资讯
+{% endblock %}
+
+{% block subtitle %}
+健康新闻
+{% endblock %}
+
+
+{% block main %}健康资讯{% endblock %}
+
+{% block content %}
+<!-- 新闻开始 -->
+<section class="section dashboard">
+  <div class="row">
+
+    <!-- Left side columns -->
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center card-title">{{news.news_title}}</h2>
+            <h6 class="text-center">{{news.c_time}}</h6>
+            <p class="card-text">{{news.news_content}}</p>
+          </div>
+          <div class="text-center" style="margin-bottom: 20px;">
+            <img src="{{news.news_img}}" class="card-img-bottom" style="width: 50%;">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ <!-- 新闻结束 -->
+
+{% endblock %}

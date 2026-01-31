@@ -1,0 +1,78 @@
+{% extends "answer.html" %}
+{% block title %}
+增加新药方
+{% endblock %}
+
+{% block subtitle %}
+增加新药方
+{% endblock %}
+
+{% block main %}增加新药方{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">增加新药方</h5>
+                    <form id="add-prescription-form" method="post" action="{% url 'UserApp:save_prescription' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="prescription-select" class="form-label">选择药方</label>
+                            <select id="prescription-select" class="form-control">
+                                <option value="">请选择</option>
+                                {% for prescription in prescriptions %}
+                                    <option value="{{ prescription.药方 }}">{{ prescription.药方 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">药方名</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">方剂类型</label>
+                            <input type="text" class="form-control" id="type" name="type" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="composition" class="form-label">组成</label>
+                            <input type="text" class="form-control" id="composition" name="composition" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="usage" class="form-label">用法</label>
+                            <input type="text" class="form-control" id="usage" name="usage" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="indications" class="form-label">主治</label>
+                            <input type="text" class="form-control" id="indications" name="indications" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back()">返回</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const prescriptions = {{ prescriptions_json|safe }};
+
+    document.getElementById('prescription-select').addEventListener('change', function() {
+        const selectedPrescription = prescriptions.find(prescription => prescription.药方 === this.value);
+        if (selectedPrescription) {
+            document.getElementById('name').value = selectedPrescription.药方;
+            document.getElementById('type').value = selectedPrescription.方剂类型;
+            document.getElementById('composition').value = selectedPrescription.组成;
+            document.getElementById('usage').value = selectedPrescription.用法;
+            document.getElementById('indications').value = selectedPrescription.主治;
+        } else {
+            document.getElementById('name').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('composition').value = '';
+            document.getElementById('usage').value = '';
+            document.getElementById('indications').value = '';
+        }
+    });
+</script>
+{% endblock %}

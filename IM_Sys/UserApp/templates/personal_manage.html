@@ -1,0 +1,444 @@
+{% extends "user_base.html" %}
+{% block title %}
+档案记录管理
+{% endblock %}
+
+{% block subtitle %}
+档案记录管理
+{% endblock %}
+
+
+{% block main %}个人健康档案{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<!--表格健康档案-->
+<section class="section profile">
+  <div class="row">
+
+
+    <!--            头像-->
+
+    <div class="col-xl-4">
+
+      <div class="card">
+        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+          <!-- <img src="../../static/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
+          <h2>{{user.user_name}}</h2>
+          <h3>{{user.email}}</h3>
+          <div class="social-links mt-2">
+            <!-- <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--            头像结束-->
+
+    <div class="col-lg-8">
+
+      <div class="card">
+        <div class="card-body pt-3">
+          <!-- Bordered Tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered">
+
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">信息</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">编辑</button>
+            </li>
+
+
+          </ul>
+          <div class="tab-content pt-2">
+
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+              <h5 class="card-title">个人基本信息</h5>
+
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label ">姓名</div>
+                <div class="col-lg-9 col-md-8">{{nui.user_name}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">性别</div>
+                <div class="col-lg-9 col-md-8">{{nui.user_sex}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">电话号</div>
+                <div class="col-lg-9 col-md-8">{{user.phone}}</div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">身份证号</div>
+                <div class="col-lg-9 col-md-8">{{user.id_no}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">年龄</div>
+                <div class="col-lg-9 col-md-8">{{nui.user_age}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">身高</div>
+                <div class="col-lg-9 col-md-8">{{nui.user_height}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">体重</div>
+                <div class="col-lg-9 col-md-8">{{nui.user_weight}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">药物过敏史</div>
+                <div class="col-lg-9 col-md-8">{{nui.allergy}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">疾病</div>
+                <div class="col-lg-9 col-md-8">{{nui.illness}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">残疾</div>
+                <div class="col-lg-9 col-md-8">{{nui.disability}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">常用药</div>
+                <div class="col-lg-9 col-md-8">{{nui.common_drugs}}</div>
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+              <!-- Profile Edit Form -->
+              <form method="post" action="{% url 'UserApp:personal_manage'%}">
+                {% csrf_token %}
+                <!-- <div class="row mb-3">
+                  <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">头像</label>
+                  <div class="col-md-8 col-lg-9">
+                    <img src="../../static/img/profile-img.jpg" alt="Profile">
+                    <div class="pt-2">
+                      <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                          class="bi bi-upload"></i></a>
+                      <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
+                          class="bi bi-trash"></i></a>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="row mb-3">
+                  <label for="user_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="user_name" type="text" class="form-control" id="user_name" value="{{user.user_name}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="user_sex" class="col-md-4 col-lg-3 col-form-label">性别</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="user_sex" type="text" class="form-control" id="user_sex" value="{{user.user_sex}}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="phone" class="col-md-4 col-lg-3 col-form-label">电话号</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="phone" type="text" class="form-control" id="phone" value="{{user.phone}}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="id_no" class="col-md-4 col-lg-3 col-form-label">身份证号</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="id_no" type="text" class="form-control" id="id_no" value="{{user.id_no}}">
+                  </div>
+                </div>
+                
+
+                <div class="row mb-3">
+                  <label for="user_age" class="col-md-4 col-lg-3 col-form-label">年龄</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="user_age" type="text" class="form-control" id="user_age" value="{{user.user_age}}">
+                  </div>
+                </div>
+                <input type="hidden" value="{{nui.infoid}}" name="iid">
+
+                <div class="row mb-3">
+                  <label for="user_height" class="col-md-4 col-lg-3 col-form-label">身高</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="user_height" type="text" class="form-control" id="user_height"
+                      value="{{nui.user_height}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="user_weight" class="col-md-4 col-lg-3 col-form-label">体重</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="user_weight" type="text" class="form-control" id="user_weight"
+                      value="{{nui.user_weight}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="allergy" class="col-md-4 col-lg-3 col-form-label">药物过敏史</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="allergy" type="text" class="form-control" id="allergy" value="{{nui.allergy}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="illness" class="col-md-4 col-lg-3 col-form-label">疾病</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="illness" type="text" class="form-control" id="illness" value="{{nui.illness}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="disability" class="col-md-4 col-lg-3 col-form-label">残疾</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="disability" type="text" class="form-control" id="disability"
+                      value="{{nui.disability}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="common_drugs" class="col-md-4 col-lg-3 col-form-label">常用药</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="common_drugs" type="text" class="form-control" id="common_drugs"
+                      value="{{nui.common_drugs}}">
+                  </div>
+                </div>
+
+
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+              </form><!-- End Profile Edit Form -->
+
+            </div>
+
+
+
+          </div><!-- End Bordered Tabs -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!--    个人基本信息记录修改 -->
+<section class="section">
+  <div class="row">
+
+
+
+    <div class="col-xl-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">历史基本个人信息</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>姓名</th>
+                  <th>性别</th>
+                  <th>年龄</th>
+                  <th>身高</th>
+                  <th>体重</th>
+                  <th>药物过敏史</th>
+                  <th>疾病史</th>
+                  <th>是否残疾</th>
+                  <th>常用药</th>
+                  <th>添加日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for info in infos %}
+
+                <tr>
+
+                  <td>{{forloop.counter}}</td>
+                  <td>{{info.user_name}}</td>
+                  <td>{{info.user_sex}}</td>
+                  <td>{{info.user_age}}</td>
+                  <td>{{info.user_height}}</td>
+                  <td>{{info.user_weight}}</td>
+                  <td>{{info.allergy}}</td>
+                  <td>{{info.illness}}</td>
+                  <td>{{info.disability}}</td>
+                  <td>{{info.common_drugs}}</td>
+                  <td>{{info.c_time|date:"Y/m/d"}}</td>
+
+
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{info.infoid}}&type=info" style="color:#dc3545;">删除</a></button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{info.infoid}}&type=info&change=1"> 修改</a></button>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+
+
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<!--    个人基本信息修改 end-->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-20">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">历史体检记录</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>检查医院</th>
+                  <th>检查项目</th>
+                  <th>血糖</th>
+                  <th>总胆固醇</th>
+                  <th>甘油三酯</th>
+                  <th>低压</th>
+                  <th>高压</th>
+                  <th>心率</th>
+                  <th>检查日期</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in PEs %}
+
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{p.hospital}}</td>
+
+                  <td>{{p.items}}</td>
+                  <td>{{p.blood_sugar}}</td>
+                  <td>{{p.total_cholesterol}}</td>
+                  <td>{{p.triglyceride}}</td>
+                  <td>{{p.minimum}}</td>
+                  <td>{{p.maximum}}</td>
+                  <td>{{p.heart_rate}}</td>
+                  <td>{{p.date|date:"Y/m/d"}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{p.PEid}}&type=PE" style="color:#dc3545;">删除</a></button>
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{p.PEid}}&type=PE&change=1"> 修改</a></button>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="row">
+    <div class="col-lg-20">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">诊疗信息</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>就诊科室</th>
+                  <th>主诉</th>
+                  <th>现病史</th>
+                  <th>既往史</th>
+                  <th>诊断</th>
+                  <th>处方药</th>
+                  <th>医嘱</th>
+                  <th>就诊日期</th>
+                  
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for v in vs %}
+
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{v.department}}</td>
+
+                  <td>{{v.chief_complaint}}</td>
+                  <td>{{v.HPI}}</td>
+                  <td>{{v.PH}}</td>
+                  <td>{{v.diagnose}}</td>
+                  <td>{{v.prescription}}</td>
+                  
+                  <td>{{v.DA}}</td>
+                  <td>{{v.c_time|date:"Y/m/d"}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-outline-danger btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{v.vid}}&type=visit" style="color:#dc3545;">删除</a></button>
+
+                      <a>|</a>
+                      <button type="button" class="btn btn-outline-info btn-sm"><a href="{% url 'UserApp:personal_manage' %}?id={{v.vid}}&type=visit&change=1"> 修改</a></button>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+{% endblock %}

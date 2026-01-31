@@ -1,0 +1,80 @@
+
+{% extends "user_base.html" %}
+{% block title %}
+我的处方
+{% endblock %}
+
+{% block subtitle %}
+我的处方
+{% endblock %}
+
+
+{% block main %}我的处方{% endblock %}
+
+{% block content %}
+
+
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-10">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">线上咨询记录</h5>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>编号</th>
+                  
+                  <th>科室</th>
+                  <th>医生</th>
+                  <th>咨询日期</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for con in consults %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  
+                  <td>{{con.d_id.deid.d_name}}</td>                  
+                  <td>{{con.d_id.doctor_name}}</td>
+                  <td>{{con.c_time|date:"Y-m-d"}}</td>
+                  <td>{{con.status}}</td>
+                  <td>
+                    <div class="btn-group">
+                     
+                      {% if con.status == 1 %}
+                      <button type="button" class="btn btn-outline-danger btn-sm" disabled><a href="" style="color:#dc3545;">删除</a> </button>
+                      <span>|</span>
+                      <button type="button" class="btn btn-outline-info btn-sm"><a href="{% url 'UserApp:my_online_consult' %}?cid={{con.c_id}}" style="color:#dc3545;">查看</a></button>
+                      {% else %}
+                      <button type="button" class="btn btn-outline-danger btn-sm" ><a href="{% url 'UserApp:my_online_consult' %}?cid={{con.c_id}}&delete={{con.c_id}}" style="color:#dc3545;">删除</a> </button>
+                      <span>|</span>
+                      <button type="button" class="btn btn-outline-info btn-sm" disabled><a href="#" style="color:#dc3545;">查看</a></button>
+                      {% endif %}
+                    </div>
+                  </td>
+
+                </tr>
+                {% endfor %}
+
+
+          </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

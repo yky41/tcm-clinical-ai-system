@@ -1,0 +1,115 @@
+{% extends "admin_base.html" %}
+{% block title %}
+个人中心
+{% endblock %}
+
+{% block subtitle %}
+个人中心
+{% endblock %}
+
+
+{% block main %}个人中心{% endblock %}
+
+{% block content %}
+<section class="section profile">
+  <div class="row">
+
+    <!--表格健康档案结束-->
+    <div class="col-lg-10">
+
+      <div class="card">
+        <div class="card-body pt-3">
+          <!-- Bordered Tabs -->
+          <ul class="nav nav-tabs nav-tabs-bordered">
+
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">信息</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">编辑</button>
+            </li>
+
+          </ul>
+          <div class="tab-content pt-2">
+
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <h5 class="card-title">个人基本信息</h5>
+
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label ">姓名</div>
+                <div class="col-lg-9 col-md-8">{{user.manager_name}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">性别</div>
+                <div class="col-lg-9 col-md-8">{{user.manager_sex}}</div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">年龄</div>
+                <div class="col-lg-9 col-md-8">{{user.manager_age}}</div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">邮箱</div>
+                <div class="col-lg-9 col-md-8">{{user.email}}</div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+            </div>
+
+            <div class="tab-pane fade pt-3" id="profile-change-password">
+              <!-- Profile Edit Form -->
+              <form action="{% url 'adminApp:admin_index'%}" method="post">
+                {% csrf_token %}
+
+                <div class="row mb-3">
+                  <label for="manager_name" class="col-md-4 col-lg-3 col-form-label">姓名</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="manager_name" type="text" class="form-control" id="manager_name" value="{{user.manager_name}}">
+                  </div>
+                </div>
+
+
+                <div class="row mb-3">
+                  <label for="manager_sex" class="col-md-4 col-lg-3 col-form-label">性别</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="manager_sex" type="text" class="form-control" id="manager_sex" value="{{user.manager_sex}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="manager_age" class="col-md-4 col-lg-3 col-form-label">年龄</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="manager_age" type="text" class="form-control" id="manager_age" value="{{user.manager_age}}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="email" class="col-md-4 col-lg-3 col-form-label">邮箱</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="email" type="text" class="form-control" id="email" value="{{user.email}}">
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+              </form><!-- End Profile Edit Form -->
+
+            </div>
+
+          </div><!-- End Bordered Tabs -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
